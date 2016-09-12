@@ -11,6 +11,7 @@ class Dexapp extends CI_Controller {
 										),
 						'scripts' => array('assets/bower_components/angular/angular.js',
 											'assets/js/app.js',
+											'assets/js/server.services.js',
 											'assets/js/server.directive.js',
 											'assets/bower_components/angular-bootstrap/ui-bootstrap.js',
 											'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
@@ -55,7 +56,7 @@ class Dexapp extends CI_Controller {
 
 					 $data = $this->input->post(array('username','password','repassword','email'),true);
 					 $data['acc_created'] = date('Y-m-d H:i:s');
-					 $data['role'] = 'Client';
+					 $data['role'] = 'Admin';
 					
 					 $this->UserInfo->
 					 			makeUser(
@@ -69,19 +70,36 @@ class Dexapp extends CI_Controller {
 					 $this->output
 						->set_status_header(200)
 						->set_header('Content-type:application/json')
-						->set_output(json_encode(array('success' => '<strong>Successfully Registered</strong>','data' => $data)),
+						->set_output(json_encode(array('success' => '<strong>Successfully Registered</strong>','data' =>  $this->UserInfo->regList())),
 																	JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 			}
 		
 	}
 
+	public function deleteUser($username)
+	{
+		if($this->UserInfo->removeUser($username))
+		{
+		$this->output
+			->set_status_header(200)
+			->set_header('Content-type:application/json')
+			->set_output(json_encode(array('data' => $this->UserInfo->regList(),'done' => true)),
+														JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		}else{
+				$this->output
+			->set_status_header(200)
+			->set_header('Content-type:application/json')
+			->set_output(json_encode(array('data' => 'false')),
+														JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		}
+	}
 	public function registered()
 	{
 		$this->output
-						->set_status_header(200)
-						->set_header('Content-type:application/json')
-						->set_output(json_encode(array('data' => $this->UserInfo->regList())),
-																	JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+			->set_status_header(200)
+			->set_header('Content-type:application/json')
+			->set_output(json_encode(array('data' => $this->UserInfo->regList())),
+														JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 			
 	}
 }

@@ -17,6 +17,12 @@ class UserInfo extends CI_Model {
 									");
 	}
 	
+	public function removeUser($username)
+	{	
+		$this->db->query("DELETE FROM userinfo WHERE username = '{$username}'");
+		return true;
+	}
+
 	public function regList()
 	{
 		$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");

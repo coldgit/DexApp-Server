@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			        <th>Username</th>
 			        <th>Email</th>
 			        <th>Role</th>
-			        <th><input placeholder="Username" class="form-control" type="text" name="username" ng-model="data.username"></th><th>Account Created</th>
+			        <th><input placeholder="Username"  class="form-control" type="text" name="username" ng-model="data.username"></th><th>Account Created</th>
 			        
 			      </tr>
 		    </thead>
@@ -48,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		    		<td>{{x.username}}</td>
 		    		<td>{{x.email}}</td>
 		    		<td>{{x.role}}</td>
-		    		<td><a href="	#">delete</a></td>
+		    		<td><button type="button" ng-click="deleteUser(x.username)" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>
 		    		<td>{{x.acc_created}}</td>
 		    		
 		    	</tr>
