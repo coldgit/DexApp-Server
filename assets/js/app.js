@@ -18,8 +18,7 @@ angular.module('dexapp_server',['ui.bootstrap','dexapp_server.directive','dexapp
 	{
 		 
 		  	UsersList.getUsers();
-		 
-		 
+	
 		  $scope.deleteUser = function(username)
 		  {
 		    UsersList.deleteUser(username);

@@ -4,8 +4,10 @@ console.log(base_url);
 angular.module('dexapp_server.services', [])
 
 .factory('UsersList', function($http,$httpParamSerializerJQLike,$rootScope) {
+ 
    return {
-    submit:function(data){
+    submit:function(data)
+    {
         console.log(data);
         var url = base_url+'/DexApp-Server/DexApp/regAuth';
         $http({
@@ -16,14 +18,15 @@ angular.module('dexapp_server.services', [])
         }).then(
           function(resp){
           console.log(resp.data.data);
-          $rootScope.reginfo = resp.data.data;
+          $rootScope.reginfo = resp.data;
           $rootScope.regData = {};
         },
           function(err){
           console.log(err);
         });
     },
-  getUsers:function(){
+  getUsers:function()
+  {
       var url = base_url+'/DexApp-Server/dexapp/registered';
        $http({
            method:'GET',
@@ -41,7 +44,8 @@ angular.module('dexapp_server.services', [])
              console.log(err);
            });
   },
-  deleteUser:function(username){
+  deleteUser:function(username)
+  {
       var url = base_url+'/DexApp-Server/dexapp/deleteUser/';
          $http({
           method:'DELETE',

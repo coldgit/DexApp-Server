@@ -56,7 +56,7 @@ class Dexapp extends CI_Controller {
 
 					 $data = $this->input->post(array('username','password','repassword','email'),true);
 					 $data['acc_created'] = date('Y-m-d H:i:s');
-					 $data['role'] = 'Admin';
+					 $data['role'] = 'Client';
 					
 					 $this->UserInfo->
 					 			makeUser(
