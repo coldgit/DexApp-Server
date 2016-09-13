@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2016 at 09:38 PM
+-- Generation Time: Sep 13, 2016 at 11:41 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.21
 
@@ -122,17 +122,12 @@ CREATE TABLE `userinfo` (
 --
 
 INSERT INTO `userinfo` (`user_id`, `username`, `password`, `email`, `role`, `acc_created`) VALUES
-(1, 'asdasdasd', '$2y$10$jb/0e5PjakaoLNVWpVUVHujTJ89oeTZl7ll3d5cNvBKQg4CkI8Yr.', 'asd@asd.com', 'Client', '2016-09-11 00:00:00'),
-(2, 'admindex', '$2y$10$69Niu/bp686liCrCT3QBaOqsfO7e/neCbBLqLDq9qe0FkKHIv6iWq', 'coldshots143@gmail.com', 'Admin', '2016-09-11 00:00:00'),
-(3, 'dexter123', '$2y$10$Wp3g/LU7EYiCSlknlFblSOH5vpRKkccd/LUF60Ro9.IZSeOnXfxuy', 'dexter@gmail.com', 'Client', '2016-09-11 22:19:56'),
-(4, 'asdasdasdasd', '$2y$10$cp6wuR7ajMSQfAHJ5mzDh.l0IOhvVqP3Ne7zbICAIWbLrG3MuINS.', 'asdasdasdasd@m.com', 'Client', '2016-09-11 22:21:55'),
-(5, 'saddddddddddddddddddddddddd', '$2y$10$9HSkPwJPX.gcCa41gCGF.ejOnXsWh7woxsohueHtovGtVQ/2jXv1C', 'saddddddddddddddddddddddddd@d.d', 'Client', '2016-09-11 22:29:49'),
-(6, 'dhaskjdhaskjdhk', '$2y$10$SYNdeZn7Mc/mOgyXrR.aleu1ED2eStlslo1EK2aUN9U.nzTqHuFDG', 'dhaskjdhaskjdhk@gamil.com', 'Client', '2016-09-11 22:39:24'),
-(7, 'qwertyuiopp', '$2y$10$bPgRaoGMlo9nDl9Vcc.rh.uth7.qJ9lbKCuDa4K2Wt7/Kj06NO7FS', 'qwertyuiopp@gmail.com', 'Client', '2016-09-11 22:49:08'),
-(8, 'asdasdasdas', '$2y$10$qTu2b2M/DiiLbQxx2Ygc5eU9eRUP5Z2Lxq3o4qACrg/EeBMd3VtIy', 'asdasdasdas@c.c', 'Client', '2016-09-12 16:02:03'),
-(9, 'hdkjashdkajsdhaskjdhaskj', '$2y$10$4brjXSwogf1VgFGu0/bOYeGxXhh5lFj.Eqw3Nx/g6oNpcL6AynZP.', 'hdkjashdkajsdhaskjdhaskj@c.c', 'Client', '2016-09-12 16:02:36'),
-(10, 'agdhasgdja', '$2y$10$O9EhI5wIRPRmJHFnocqgZ.xlb0vEGSOovlZHabIAQilRziaLWGVfe', 'agdhasgdja@c.c', 'Client', '2016-09-12 16:03:30'),
-(11, 'asgdjhasdgjh', '$2y$10$wZU995V3YbJs8Hb9/Vn2N.hfzGkJKpBB29ZLnIgEBiU6JX7UsK1ZS', 'asgdjhasdgjh@c.c', 'Client', '2016-09-12 16:03:42');
+(23, 'dasdasdasdasdasdasdasdas', '$2y$10$8.pbbJUHMdTKf4sE8M0Nc.hZIGlLNR0FgWho59DaBGJZZqD374UWq', 'dasdasdasdasdasdasdasdas@c.c', 'Client', '2016-09-13 17:31:21'),
+(24, 'dexter123', '$2y$10$QXC3xPlB7ONBcu85cM7.2eGukJn/tXs2oa8pyCWihWTrGvkSPwvKC', 'dexter123@c.c', 'Client', '2016-09-13 17:49:12'),
+(25, 'alvin123', '$2y$10$2EP8SL/akJq9t3KDUZKRQO6UV5Vjg6F6LTSfI91LCoLnWwHcl9t.a', 'alvin123@c.c', 'Client', '2016-09-13 17:57:08'),
+(26, 'asdasdasd', '$2y$10$DqbuWIRiJNhQPTWuQzEXauv9.TmiBqhGXKECvAK98Y.t9f0I7Y4tq', 'asdasd@c.c', 'Client', '2016-09-13 23:08:50'),
+(27, 'qwertyui', '$2y$10$H1w6fViW0Q7leKH7F8DniOoCmviNnWWdMQETHqHPphIW5p3uZMrVa', 'qwertyui@c.c', 'Client', '2016-09-13 23:36:43'),
+(28, 'arthur123', '$2y$10$B6TWlBSDheegL5n7BGYiyes7lgeXaU6KX4ZQvg3Wzxve9GWQkRd1e', 'arthur123@c.c', 'Client', '2016-09-13 23:39:08');
 
 -- --------------------------------------------------------
 
@@ -238,7 +233,7 @@ ALTER TABLE `comment_per_episode`
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

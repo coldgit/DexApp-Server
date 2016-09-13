@@ -28,15 +28,42 @@ class UserInfo extends CI_Model {
 		$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");
 		return $query->result_array();
 	}
-	// public function getUser($username)
-	// {	
+	public function getUser($username)
+	{	
 				
-	// 	$query = $this->db->query("SELECT username,password,email,role,acc_stat FROM users_list WHERE username = '{$username}'");
-	// 	if($query->num_rows() === 1)
-	// 	{
-	// 		return $query->result_array();
-	// 	}else{
-	// 		return false;
-	// 	}
-	// }
+		$query = $this->db->query("SELECT user_id,username,email,password,role FROM userinfo WHERE username = '{$username}'");
+		if($query->num_rows() === 1)
+		{
+			return $query->result_array();
+		}else{
+			return false;
+		}
+	}
+
+	public function updateUser($user_id,$username,$password,$email)
+	{
+		$info = array(
+				'username' => array('username',$username), 
+				'password' => array('password',((isset($password))? password_hash($password,PASSWORD_BCRYPT) : null)),
+				'email' =>array('email' ,$email));
+		foreach ($info as $x) 
+		{
+			switch (isset($x[1])) 
+			{
+				case 1:
+					$this->db->query("UPDATE userinfo 
+						  SET '{$x[0]}' = '{$x[1]}'
+	 					  WHERE user_id = '{$user_id}'
+	 					");
+					return true;
+					break;
+				
+				default:
+					echo 'false';
+					break;
+			}
+			
+		}
+		
+	}
 }

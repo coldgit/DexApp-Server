@@ -6,7 +6,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Welcome to CodeIgniter</title>
+	<title>Welcome to DexApp</title>
 	
 	<!--CSS-->
 	 <?php foreach ($css as $style):?>
@@ -19,56 +19,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	.title-home{text-align: center;color: rgb(72,72,72) !important;font-weight: bold;font-size: 50px;font-style: normal;}
 	.logo{height:10%;width: 10%;}
 	.logo:hover{opacity: 0.8}
-	
+	.user-error{color:#f00;}
 	</style>
 </head>
 <body ng-app="dexapp_server">
-<div class="container">
-	
-	<!-- <div >
+	<div class="container">
+		<div class="jumbotron" >
 
-		<h1  class="title-home">Welcome to <img class="logo"src="<?//=base_url('uploads/img/logo.png');?>"></h1>
-	</div> -->
-	<regform></regform>
-	<div class="col-md-10" ng-controller="UsersCtrl">
+			<h1  class="title-home">Welcome to <img class="logo"src="<?=base_url('uploads/img/logo.png');?>"></h1>
+		</div>
+		<div class="row">
+			<carousel></carousel>
+			<div class="col-md-5">
+				 <form name="outerForm" class="tab-form-demo">
+				    <uib-tabset active="activeForm">
+				      <uib-tab index="0" heading="Login">
+				      	<br>
+				      	<logform></logform>
+				      </uib-tab>
+				      <uib-tab index="1" heading="Register Now!">
+				      <br>
+				        <regform></regform>
+				      </uib-tab>
+				      	
+				    </uib-tabset>
+				  </form>
 
-			
-		<table class="table table-responsive">
-				<thead>
-			      <tr>
-			        <th>Username</th>
-			        <th>Email</th>
-			        <th>Role</th>
-			        <th><input placeholder="Username"  class="form-control" type="text" name="username" ng-model="data.username"></th><th>Account Created</th>
-			        
-			      </tr>
-		    </thead>
-		    <tbody>
-		    	<tr ng-repeat="x in reginfo.data.slice(((currentPage-1)*10), ((currentPage)*10)) | filter:data">
-		    		<td>{{x.username}}</td>
-		    		<td>{{x.email}}</td>
-		    		<td>{{x.role}}</td>
-		    		<td><button type="button" ng-click="deleteUser(x.username)" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>
-		    		<td>{{x.acc_created}}</td>
-		    		
-		    	</tr>
-		    	
-		    </tbody>
-		</table>
-		<div >				
-			
-				   <ul uib-pagination 
-				    	total-items="totalItems" 
-				    	ng-model="currentPage" 
-				    	max-size="maxSize" 
-				    	class="pagination-sm" 
-				    	direction-links="true" 
-				    	num-pages="numPages">
-				    </ul>
-				</div>
-	</div>
+			</div>
+		
+		</div>	
 </div>
-
+	<!-- 	
+		<reglist></reglist> -->
+	</div>
 </body>
 	<!--JavaScript-->
 	 <?php foreach ($scripts as $script):?>
