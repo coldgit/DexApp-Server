@@ -105,6 +105,26 @@ return {
               function(err){
                console.log(err);
               });
+    },
+    check:function(username){
+       $http({
+             method:'GET',
+             url:'http://127.0.0.1:8080/DexApp-Server/dexapp/checkusername',
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+             params:{username:username},
+           }).then(
+             function(resp){
+                 console.log(resp.data);
+                 if(resp.data.check)
+                 {
+                  $rootScope.checkU_Match = resp.data.check;
+                 }else{
+                  $rootScope.checkU_Match = resp.data.check;
+                 }
+             },
+             function(err){
+               console.log(err);
+             });
     }
   
 }
