@@ -66,4 +66,6 @@ class UserInfo extends CI_Model {
 		}
 		
 	}
+
+
 }

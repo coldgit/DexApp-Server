@@ -1,17 +1,40 @@
 angular.module('dexapp_server',['ui.bootstrap','dexapp_server.directive','dexapp_server.services'])
-.controller('DexApp_ctrl', function($scope,$rootScope,UsersList)
+.controller('DexApp_ctrl', function($scope,$rootScope,UsersList,$http,$httpParamSerializerJQLike)
 	{
-		
+		$rootScope.regData = {};
 		$scope.change = function(){
 
 			console.log($scope.x);
 		}
-		$rootScope.regData = {};
+    $scope.checkU_Match = true;
+    $scope.checkUsername = function(){
+       $http({
+             method:'GET',
+             url:'http://127.0.0.1:8080/DexApp-Server/dexapp/checkusername',
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+             params:{username:$scope.regData.username},
+           }).then(
+             function(resp){
+                 console.log(resp.data);
+                 if(resp.data.check)
+                 {
+                  $scope.checkU_Match = resp.data.check;
+                 }else{
+                  $scope.checkU_Match = resp.data.check;
+                 }
+             },
+             function(err){
+               console.log(err);
+             });
+     //    $scope.checkUsernameMatch = ((  $scope.regData.username!=  $scope.regData.repassword)? false:true);
+    }
+		
      $scope.passwordmatch = true;
     $scope.check = function(){
                                $scope.passwordmatch = ((  $scope.regData.password!=  $scope.regData.repassword)? false:true);
                             }
     
+
 		$scope.submit = function(){
 
 				UsersList.submit($rootScope.regData);

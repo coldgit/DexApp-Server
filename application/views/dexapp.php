@@ -20,6 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	.logo{height:10%;width: 10%;}
 	.logo:hover{opacity: 0.8}
 	.user-error{color:#f00;}
+	.d_success{color:green;}
 	</style>
 </head>
 <body ng-app="dexapp_server">

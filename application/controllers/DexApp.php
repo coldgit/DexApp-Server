@@ -70,7 +70,7 @@ class Dexapp extends CI_Controller {
 					 $this->output
 						->set_status_header(200)
 						->set_header('Content-type:application/json')
-						->set_output(json_encode(array('success' => 'Successfully Registered','data' =>  $this->UserInfo->regList())),
+						->set_output(json_encode(array('success' => 'Successfully Registered!','data' =>  $this->UserInfo->regList())),
 																	JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 			}
 		
@@ -164,7 +164,7 @@ class Dexapp extends CI_Controller {
 							
 							case 'Client':
 								$this->output
-								->set_status_header(200)
+								->set_status_header(300)
 								->set_header('Content-type:application/json')
 								->set_output(json_encode(array('success' => 'TRUE','location' => 'client')),
 															JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -173,5 +173,24 @@ class Dexapp extends CI_Controller {
 								}
 					}
 				}
+	}
+
+	public function checkusername()
+	{
+
+		if(!$this->UserInfo->getUser($this->input->get('username')))
+		{
+			$this->output
+				->set_status_header(200)
+				->set_header('Content-type:application/json')
+				->set_output(json_encode(array('check' => true)),
+											JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		}else{
+			$this->output
+				->set_status_header(200)
+				->set_header('Content-type:application/json')
+				->set_output(json_encode(array('check' => false)),
+											JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		}
 	}
 }

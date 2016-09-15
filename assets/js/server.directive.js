@@ -29,9 +29,13 @@ angular.module('dexapp_server.directive',[])
     			+'<form name="regForm" ng-submit="submit()">'
     			+'<div class="form-group">'
 	    			+'<label>Username '+'</label>'
+                     
                     +'<span class="user-error"ng-show="regForm.username.$error.required"> is required!.</span>'
-                     +'</span>'
-	    			+'<input type="text" class="form-control" name="username" ng-model="regData.username" required>'
+                    +'<span ng-show="!regForm.username.$error.required"><span  ng-if="checkU_Match" class="d_success"> is Available!</span>'
+                      +'<span ng-if="!checkU_Match" class="user-error"> is not Available!</span>'
+                  
+                     +' </span>'
+	    			+'<input type="text" class="form-control" name="username" ng-model="regData.username" ng-keyup="checkUsername()" required>'
     			+'</div>'
     			+'<div class="form-group">'
     				+'<label>Password '+'</label>'
