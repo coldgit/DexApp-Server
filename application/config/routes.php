@@ -50,6 +50,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'dexapp';
-//$route['regAuth'] = ['dexapp/regAuth'];
+
+// POST METHOD
+$route['regauth']['POST'] = 'dexapp/regAuth'; 
+$route['login']['POST'] = 'dexapp/login/';
+
+
+//GET METHOD
+$route['reglist']['GET'] = 'dexapp/registered';
+$route['user?(:any)']['GET'] = 'dexapp/getUser/$1';
+$route['checkuser?(:any)']['GET'] = 'dexapp/checkusername/$1';
+
+
+//DELETE METHOD
+$route['delete?(:any)']['DELETE'] = 'dexapp/deleteUser/$1';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+
+
+
+// 		ROUTES													RESOURCE												METHOD				DESCRIPTION							
+// $route['regauth']['POST'] = 'dexapp/regAuth'; 					localhost/DexApp-Server/regauth  						POST			add new data of the users				
+// $route['login']['POST'] = 'dexapp/login/';						localhost/DexApp-Server/login							POST			authenticate the data of login
+	
+// $route['reglist']['GET'] = 'dexapp/registered';					localhost/DexApp-Server/reglist							GET			list of the registered users
+// $route['user?(:any)']['GET'] = 'dexapp/getUser/$1';				localhost/DexApp-Server/user?username=dexter1231		GET			get the info of the user 					
+// $route['checkuser?(:any)']['GET'] = 'dexapp/checkusername/$1';	localhost/DexApp-Server/checkuser?username=dexter1231	GET			check the availability of the username
+
+// $route['delete?(:any)']['DELETE'] = 'dexapp/deleteUser/$1';		localhost/DexApp-Server/delete?username=dexter1231		DELETE			remove certain user account via username

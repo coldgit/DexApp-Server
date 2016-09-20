@@ -20,7 +20,7 @@ return {
     submit:function(data)
     {
        
-        var url = base_url+'/DexApp-Server/DexApp/regAuth';
+        var url = base_url+'/DexApp-Server/regauth';
         $http({
           method:'POST',
           url: url,
@@ -39,7 +39,7 @@ return {
     },
     getUsers:function()
     {
-        var url = base_url+'/DexApp-Server/dexapp/registered';
+        var url = base_url+'/DexApp-Server/reglist';
          $http({
              method:'GET',
              url:url,
@@ -58,7 +58,7 @@ return {
     },
     deleteUser:function(username)
     {
-        var url = base_url+'/DexApp-Server/dexapp/deleteUser/';
+        var url = base_url+'/DexApp-Server/delete?username=';
            $http({
             method:'DELETE',
             url:url+username,
@@ -74,10 +74,10 @@ return {
     },
     getUser:function(username) //get single info in users list
     {
-      var url = base_url+'/DexApp-Server/dexapp/getUser/';
+      var url = base_url+'/DexApp-Server/user?username='+username;
            $http({
             method:'GET',
-            url:url+username,
+            url:url,
             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
           }).then(
             function(resp){
@@ -91,7 +91,7 @@ return {
     login:function(data)
     { 
       console.log(data);
-      var url = base_url+'/DexApp-Server/dexapp/login/';
+      var url = base_url+'/DexApp-Server/login';
            $http({
               method:'POST',
               url:url,
@@ -109,9 +109,9 @@ return {
     check:function(username){
        $http({
              method:'GET',
-             url:'http://127.0.0.1:8080/DexApp-Server/dexapp/checkusername',
+             url:base_url+'/DexApp-Server/checkuser?username='+username,
              headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-             params:{username:username},
+          //   params:{username:username},
            }).then(
              function(resp){
                  console.log(resp.data);

@@ -78,7 +78,7 @@ class Dexapp extends CI_Controller {
 
 	public function deleteUser($username)
 	{
-		if($this->UserInfo->removeUser($username))
+		if($this->UserInfo->removeUser($_GET['username']))
 		{
 		$this->output
 			->set_status_header(200)
@@ -108,7 +108,7 @@ class Dexapp extends CI_Controller {
 		$this->output
 			->set_status_header(200)
 			->set_header('Content-type:application/json')
-			->set_output(json_encode( $this->UserInfo->getUser($username)),
+			->set_output(json_encode( $this->UserInfo->getUser($_GET['username'])[0]),
 														JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 			
 	}
@@ -175,10 +175,10 @@ class Dexapp extends CI_Controller {
 				}
 	}
 
-	public function checkusername()
+	public function checkusername($username)
 	{
 
-		if(!$this->UserInfo->getUser($this->input->get('username')))
+		if(!$this->UserInfo->getUser($_GET['username']))
 		{
 			$this->output
 				->set_status_header(200)
