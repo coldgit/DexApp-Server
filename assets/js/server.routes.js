@@ -1,15 +1,17 @@
+var base_url = window.location.protocol+'//'+window.location.host;
+
 angular.module('dexapp_server.routes',[])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('http://127.0.0.1:8080/DexApp-Server/', {
-    url: 'http://127.0.0.1:8080/DexApp-Server/',
+    .state(base_url, {
+    url: base_url,
     abstract: true,
    
   })
 
-    .state('http://127.0.0.1:8080/DexApp-Server/', {
-    url: 'http://127.0.0.1:8080/DexApp-Server/update',
+    .state(base_url+'update', {
+    url: base_url+'update',
   })
 
 
