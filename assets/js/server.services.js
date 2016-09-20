@@ -1,6 +1,10 @@
 var base_url = window.location.protocol+'//'+window.location.host;
 
+<<<<<<< HEAD
 //console.log(base_url);
+=======
+console.log(base_url);
+>>>>>>> 58897e094e7362cb1c5f10b5a9767d1a4d6bfed0
 
 angular.module('dexapp_server.services', [])
 

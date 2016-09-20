@@ -40,12 +40,21 @@ class UserInfo extends CI_Model {
 		}
 	}
 
+<<<<<<< HEAD
 	public function updateUser($data)
 	{
 		$info = array(
 				'username' => array('username',$data['username']), 
 				'password' => array('password',((isset($data['password']))? password_hash($data['password'],PASSWORD_BCRYPT) : null)),
 				'email' =>array('email' ,$data['email']));
+=======
+	public function updateUser($user_id,$username,$password,$email)
+	{
+		$info = array(
+				'username' => array('username',$username), 
+				'password' => array('password',((isset($password))? password_hash($password,PASSWORD_BCRYPT) : null)),
+				'email' =>array('email' ,$email));
+>>>>>>> 58897e094e7362cb1c5f10b5a9767d1a4d6bfed0
 		foreach ($info as $x) 
 		{
 			switch (isset($x[1])) 

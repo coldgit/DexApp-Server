@@ -25,12 +25,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body ng-app="dexapp_server">
 	<div class="container">
+<<<<<<< HEAD
 		<div class="jumbotron" >
 
 			<h1  class="title-home">Welcome to <img class="logo"src="<?=base_url('uploads/img/logo.png');?>"></h1>
 		</div>
 		<div class="row">
 			<carousel></carousel>
+=======
+		<!-- <div class="jumbotron" >
+
+			<h1  class="title-home">Welcome to <img class="logo"src="<?=base_url('uploads/img/logo.png');?>"></h1>
+		</div> -->
+		<div class="row">
+			<!-- <carousel></carousel> -->
+>>>>>>> 58897e094e7362cb1c5f10b5a9767d1a4d6bfed0
 			<div class="col-md-5">
 				 <form name="outerForm" class="tab-form-demo">
 				    <uib-tabset active="activeForm">
@@ -50,8 +59,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		</div>	
 </div>
+<<<<<<< HEAD
 <!-- 		
 		<reglist></reglist> -->
+=======
+		
+		<reglist></reglist>
+>>>>>>> 58897e094e7362cb1c5f10b5a9767d1a4d6bfed0
 	</div>
 </body>
 	<!--JavaScript-->

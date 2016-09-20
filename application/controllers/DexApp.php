@@ -11,11 +11,16 @@ class Dexapp extends CI_Controller {
 										),
 						'scripts' => array('assets/bower_components/angular/angular.js',
 											'assets/js/app.js',
+<<<<<<< HEAD
 											'assets/js/server.controllers.js',
 											'assets/js/server.routes.js',
 											'assets/js/server.services.js',
 											'assets/js/server.directive.js',
 											'assets/bower_components/angular-ui-router/release/angular-ui-router.js',
+=======
+											'assets/js/server.services.js',
+											'assets/js/server.directive.js',
+>>>>>>> 58897e094e7362cb1c5f10b5a9767d1a4d6bfed0
 											'assets/bower_components/angular-bootstrap/ui-bootstrap.js',
 											'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 										)
@@ -30,6 +35,7 @@ class Dexapp extends CI_Controller {
 		$this->load->view('dexapp',$this->resources);
 	}
 
+<<<<<<< HEAD
 	public function updateUser()
 	{
 		$data = $this->input->post();
@@ -40,6 +46,9 @@ class Dexapp extends CI_Controller {
 			->set_output(json_encode(array('data' => $this->UserInfo->regList(),'done' => true)),
 														JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 	}
+=======
+
+>>>>>>> 58897e094e7362cb1c5f10b5a9767d1a4d6bfed0
 	public function regAuth()
 	{
 		$data = $this->input->post();
