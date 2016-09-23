@@ -56,7 +56,7 @@ class UserInfo extends CI_Model {
 			}
 
 	}
-
+	
 	public function updateUser($data)
 	{
 		$info = array(

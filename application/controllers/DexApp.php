@@ -86,24 +86,18 @@ class Dexapp extends CI_Controller {
 														JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 	}
 
-	public function deleteUser($username)
+	
+	public function profile($username)
 	{
-		if($this->UserInfo->removeUser($_GET['username']))
-		{
+		$data = $this->input->get();
+		$data['key'] = 'GET';
+		$data['single_q'] = (empty($_GET['username']))? 'false':'true';
 		$this->output
 			->set_status_header(200)
 			->set_header('Content-type:application/json')
-			->set_output(json_encode(array('data' => $this->UserInfo->regList(),'done' => true)),
-														JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-		}else{
-				$this->output
-			->set_status_header(200)
-			->set_header('Content-type:application/json')
-			->set_output(json_encode(array('data' => 'false')),
-														JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-		}
+			->set_output(json_encode($this->UserInfo->users($data)),
+										JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 	}
-
 	public function login()
 	{
 		//$data = array('username'=>'dexterity','password'=>'cold@123');
