@@ -51,19 +51,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'dexapp';
 
-// POST METHOD
-$route['regauth']['POST'] = 'dexapp/regAuth'; 
+$route['users?(:any)'] = 'dexapp/users/$1';
+
 $route['login']['POST'] = 'dexapp/login/';
 
-
-//GET METHOD
-$route['reglist']['GET'] = 'dexapp/registered';
-$route['user?(:any)']['GET'] = 'dexapp/getUser/$1';
-$route['checkuser?(:any)']['GET'] = 'dexapp/checkusername/$1';
+$route['checkusersname?(:any)']['GET'] = 'dexapp/checkusername/$1';
 
 
 //DELETE METHOD
-$route['delete?(:any)']['DELETE'] = 'dexapp/deleteUser/$1';
+// $route['delete?(:any)']['DELETE'] = 'dexapp/deleteUser/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

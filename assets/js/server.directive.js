@@ -73,7 +73,7 @@ angular.module('dexapp_server.directive',[])
                   +'</tr>'
             +'</thead>'
             +'<tbody>'
-                +'<tr ng-repeat="x in reginfo.data.slice(((currentPage-1)*10), ((currentPage)*10)) | filter:data">'
+                +'<tr ng-repeat="x in reginfo.slice(((currentPage-1)*10), ((currentPage)*10)) | filter:data">'
                     +'<td>{{x.username}}</td>'
                     +'<td>{{x.email}}</td>'
                     +'<td>{{x.role}}</td>'

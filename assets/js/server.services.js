@@ -1,7 +1,4 @@
 var base_url = window.location.protocol+'//'+window.location.host;
-
-console.log(base_url);
-
 angular.module('dexapp_server.services', [])
 
 .factory('UsersList', function($http,$httpParamSerializerJQLike,$rootScope) {
@@ -20,7 +17,7 @@ return {
     submit:function(data)
     {
        
-        var url = base_url+'/DexApp-Server/regauth';
+        var url = base_url+'/DexApp-Server/users';
         $http({
           method:'POST',
           url: url,
@@ -39,16 +36,16 @@ return {
     },
     getUsers:function()
     {
-        var url = base_url+'/DexApp-Server/reglist';
+        var url = base_url+'/DexApp-Server/users';
          $http({
              method:'GET',
              url:url,
              headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
            }).then(
              function(resp){
-                 console.log(resp.data.data.length);
+                 console.log(resp.data.length);
                  $rootScope.reginfo = resp.data;
-                 $rootScope.totalItems = resp.data.data.length;
+                 $rootScope.totalItems = resp.data.length;
                  $rootScope.currentPage = 1;
                  $rootScope.maxSize = 5;
              },
@@ -58,14 +55,14 @@ return {
     },
     deleteUser:function(username)
     {
-        var url = base_url+'/DexApp-Server/delete?username=';
+        var url = base_url+'/DexApp-Server/users?username=';
            $http({
             method:'DELETE',
             url:url+username,
             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
           }).then(
             function(resp){
-                console.log(resp.data.data.length);
+                console.log(resp.data.length);
                 $rootScope.reginfo = resp.data;
             },
             function(err){
@@ -74,14 +71,14 @@ return {
     },
     getUser:function(username) //get single info in users list
     {
-      var url = base_url+'/DexApp-Server/user?username='+username;
+      var url = base_url+'/DexApp-Server/users?username='+username;
            $http({
             method:'GET',
             url:url,
             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
           }).then(
             function(resp){
-                console.log(resp.data);
+                console.log(resp.data[0]);
                 
             },
             function(err){
@@ -109,7 +106,7 @@ return {
     check:function(username){
        $http({
              method:'GET',
-             url:base_url+'/DexApp-Server/checkuser?username='+username,
+             url:base_url+'/DexApp-Server/checkusersname?username='+username,
              headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
           //   params:{username:username},
            }).then(

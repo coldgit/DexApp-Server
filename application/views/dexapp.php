@@ -53,8 +53,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		</div>	
 </div>
-<!-- 		
-		<reglist></reglist> -->
+		
+		<reglist></reglist>
 	</div>
 </body>
 	<!--JavaScript-->
