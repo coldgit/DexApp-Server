@@ -50,12 +50,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'dexapp';
-$route['(:any)'] = 'dexapp/profile/$1';
+
 $route['users?(:any)'] = 'dexapp/users/$1';
 
-$route['login']['POST'] = 'dexapp/login/';
+$route['(:any)'] = 'dexapp/profile/$1';
 
-$route['checkusersname?(:any)']['GET'] = 'dexapp/checkusername/$1';
+$route['auth'] = 'dexapp/login';
+
+//$route['checker']= 'dexapp/checker/$d';
 
 
 //DELETE METHOD

@@ -1,4 +1,5 @@
 var base_url = window.location.protocol+'//'+window.location.host;
+console.log(base_url);
 angular.module('dexapp_server.services', [])
 
 .factory('UsersList', function($http,$httpParamSerializerJQLike,$rootScope) {
@@ -88,7 +89,7 @@ return {
     login:function(data)
     { 
       console.log(data);
-      var url = base_url+'/DexApp-Server/login';
+      var url = base_url+'/DexApp-Server/dexapp/auth';
            $http({
               method:'POST',
               url:url,
@@ -106,8 +107,8 @@ return {
     check:function(username){
        $http({
              method:'GET',
-             url:base_url+'/DexApp-Server/checkusersname?username='+username,
-             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+             url:base_url+'/DexApp-Server/dexapp/checker?username='+username,
+            // headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
           //   params:{username:username},
            }).then(
              function(resp){

@@ -57,32 +57,34 @@ class UserInfo extends CI_Model {
 
 	}
 	
-	public function updateUser($data)
-	{
-		$info = array(
-				'username' => array('username',$data['username']), 
-				'password' => array('password',((isset($data['password']))? password_hash($data['password'],PASSWORD_BCRYPT) : null)),
-				'email' =>array('email' ,$data['email']));
-		foreach ($info as $x) 
-		{
-			switch (isset($x[1])) 
-			{
-				case 1:
-					$this->db->query("UPDATE userinfo 
-						  SET '{$x[0]}' = '{$x[1]}'
-	 					  WHERE user_id = '{$user_id}'
-	 					");
-					return true;
-					break;
-				
-				default:
-					echo 'false';
-					break;
-			}
-			
-		}
+	// public function updateUser($data)
+	// {	
+	// 	$data = $data+array('key' => 'GET','single_q' => 'true');
 		
-	}
+	// 	$up = $this->users($data);
+	// 	var_dump($up);
+	// 	$info = array(
+	// 			'username' => array('username',((isset($data['username']))? $data['username']:$up['username'])), 
+	// 			'password' => array('password',((isset($data['password']))? password_hash($data['password'],PASSWORD_BCRYPT) : $up['password'])),
+	// 			'email'	   => array('email' ,((isset($data['email']))? $data['email']: $up[0]['email'])));
+		
+	// 	foreach ($info as $x) 
+	// 	{
+	// 		switch (isset($x[1])) 
+	// 		{
+	// 			case 1:
+	// 				$this->db->query("UPDATE userinfo SET $x[0] = '{$x[1]}' WHERE user_id = '{$up[0]['user_id']}' ");
+	// 				return true;
+	// 				break;
+				
+	// 			default:
+	// 				echo 'false';
+	// 				break;
+	// 		}
+			
+	// 	}
+		
+//	}
 
 
 }
