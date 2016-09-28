@@ -41,18 +41,15 @@ class Dexapp extends CI_Controller {
 		$data['single_q'] = (empty($_GET['username']))? 'false':'true';
 		if(!$this->UserInfo->users($data))
 		{
-				$this->output
-					->set_status_header(200)
-					->set_header('Content-type:application/json')
-					->set_output(json_encode(array('check' => true)),
-												JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+				$out = array('check' => true);
 		}else{
-				$this->output
+				$out = array('check' => false);
+		}
+		$this->output
 					->set_status_header(200)
 					->set_header('Content-type:application/json')
-					->set_output(json_encode(array('check' => false)),
+					->set_output(json_encode($out),
 												JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-		}
 		//var_dump($_GET['username']);
 	}
 
