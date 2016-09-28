@@ -36,7 +36,7 @@ class MY_Controller extends CI_Controller
 			->set_status_header($stat)
 			->set_header('Content-type:application/json')
 			->set_output(json_encode($out),
-											JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+			JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 	}
 	
 }

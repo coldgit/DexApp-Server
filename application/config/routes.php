@@ -53,11 +53,11 @@ $route['default_controller'] = 'dexapp';
 
 $route['users?(:any)'] = 'dexapp/users/$1';
 
-$route['(:any)'] = 'dexapp/profile/$1';
+//$route['(:any)'] = 'dexapp/profile/$1';
 
-$route['auth'] = 'dexapp/auth';
+$route['Auth'] = 'dexapp/Login';
 
-//$route['checker']= 'dexapp/checker/$d';
+$route['Checker?(:any)']= 'dexapp/checker/$1';
 
 
 //DELETE METHOD

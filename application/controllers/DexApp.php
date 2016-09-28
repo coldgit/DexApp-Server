@@ -17,9 +17,9 @@ class Dexapp extends MY_Controller
 
 	public function checker()
 	{
-		$data = $this->input->get();
+		$data = $this->input->post();
 		$data['key'] = 'GET';
-		$data['single_q'] = (empty($_GET['username']))? 'false':'true';
+		$data['single_q'] = (empty($_POST['username']))? 'false':'true';
 		if(!$this->UserInfo->users($data))
 		{
 				$out = array('check' => true);
@@ -47,14 +47,15 @@ class Dexapp extends MY_Controller
 		
 	}
 	
-	public function auth()
+	public function Login()
 	{
 		//$data = array('username'=>'dexterity','password'=>'cold@123');
 
 		$data = $this->input->post()+array('key' => 'GET','single_q' => 'true');
 		$info = $this->UserInfo->users($data);
 		$err = array('error_login' => 'Invalid Username Or Password');	
-		switch($info){
+		switch($info)
+		{
 			case FALSE:
 				$this->_resp(200,array('err' =>$err));	
 			break;
@@ -63,7 +64,7 @@ class Dexapp extends MY_Controller
 					
 			$passmatch = password_verify($data['password'],$info[ 0 ]['password']);
 				switch($passmatch)
-					{
+				{
 					case FALSE:
 						$this->_resp(200,array('err' =>$err));	
 						break;
@@ -76,7 +77,7 @@ class Dexapp extends MY_Controller
 								 'logged_in' => TRUE
 						);
 						switch($info[ 0 ]['role'])
-							{
+						{
 							case 'Admin':
 								$this->_resp(200,array('success' => 'TRUE','location' => 'admin'));
 								//$this->session->set_userdata($items);
@@ -86,9 +87,9 @@ class Dexapp extends MY_Controller
 							$this->_resp(300,array('success' => 'TRUE','location' => 'client'));
 								//$this->session->set_userdata($items);
 								break;		
-								}
-					}
+						}
 				}
+		}
 	}
 
 	// public function up()
@@ -110,14 +111,11 @@ class Dexapp extends MY_Controller
 	
 	// public function profile($username)
 	// {
-	// 	$data = $this->input->get();
+	// 	$data = $this->input->post();
 	// 	$data['key'] = 'GET';
 	// 	$data['single_q'] = (empty($_GET['username']))? 'false':'true';
-	// 	$this->output
-	// 		->set_status_header(200)
-	// 		->set_header('Content-type:application/json')
-	// 		->set_output(json_encode($this->UserInfo->users($data)),
-	// 									JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+	// 	$this->_resp(300,$this->UserInfo->users($data));
+		
 	// }
 
 	
