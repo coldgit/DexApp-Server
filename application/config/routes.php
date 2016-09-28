@@ -55,7 +55,7 @@ $route['users?(:any)'] = 'dexapp/users/$1';
 
 $route['(:any)'] = 'dexapp/profile/$1';
 
-$route['auth'] = 'dexapp/login';
+$route['auth'] = 'dexapp/auth';
 
 //$route['checker']= 'dexapp/checker/$d';
 

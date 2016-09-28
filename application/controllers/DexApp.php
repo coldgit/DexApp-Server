@@ -2,33 +2,14 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //base controller
-class Dexapp extends CI_Controller {
+class Dexapp extends MY_Controller
+{
 
-	
-	public $resources = [
-	 					'css' => array('assets/bower_components/bootstrap/dist/css/bootstrap.css',
-										'assets/bower_components/angular-bootstrap/ui-bootstrap-csp.css'
-										),
-						'scripts' => array('assets/bower_components/angular/angular.js',
-											'assets/js/app.js',
-											'assets/js/server.controllers.js',
-												'assets/js/server.routes.js',
-											'assets/js/server.services.js',
-											'assets/js/server.directive.js',
-											'assets/bower_components/angular-ui-router/release/angular-ui-router.js',
-
-											'assets/js/server.services.js',
-											'assets/js/server.directive.js',
-
-											'assets/bower_components/angular-bootstrap/ui-bootstrap.js',
-											'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
-										)
-						];
 	public function __construct()
 	{
 		parent::__construct();
 	}
-	
+
 	public function index()
 	{
 		$this->load->view('dexapp',$this->resources);
@@ -45,12 +26,7 @@ class Dexapp extends CI_Controller {
 		}else{
 				$out = array('check' => false);
 		}
-		$this->output
-					->set_status_header(200)
-					->set_header('Content-type:application/json')
-					->set_output(json_encode($out),
-												JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-		//var_dump($_GET['username']);
+		$this->_resp(200,$out);
 	}
 
 	public function users(){
@@ -67,12 +43,54 @@ class Dexapp extends CI_Controller {
 		}else{
 			$data += $this->input->$data['method']();
 		}
-		$this->output
-					->set_status_header(200)
-					->set_header('Content-type:application/json')
-					->set_output(json_encode($this->UserInfo->users($data)),
-					JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		$this->_resp(200,$this->UserInfo->users($data));
+		
 	}
+	
+	public function auth()
+	{
+		//$data = array('username'=>'dexterity','password'=>'cold@123');
+
+		$data = $this->input->post()+array('key' => 'GET','single_q' => 'true');
+		$info = $this->UserInfo->users($data);
+		$err = array('error_login' => 'Invalid Username Or Password');	
+		switch($info){
+			case FALSE:
+				$this->_resp(200,array('err' =>$err));	
+			break;
+					
+			default:
+					
+			$passmatch = password_verify($data['password'],$info[ 0 ]['password']);
+				switch($passmatch)
+					{
+					case FALSE:
+						$this->_resp(200,array('err' =>$err));	
+						break;
+						
+					case TRUE:
+						$items = array(
+								'username' => $info[ 0 ]['username'],
+								'email' => $info[ 0 ]['email'],
+								'role' => $info[ 0 ]['role'],
+								 'logged_in' => TRUE
+						);
+						switch($info[ 0 ]['role'])
+							{
+							case 'Admin':
+								$this->_resp(200,array('success' => 'TRUE','location' => 'admin'));
+								//$this->session->set_userdata($items);
+							break;
+							
+							case 'Client':
+							$this->_resp(300,array('success' => 'TRUE','location' => 'client'));
+								//$this->session->set_userdata($items);
+								break;		
+								}
+					}
+				}
+	}
+
 	// public function up()
 	// {	
 	// 	$data = $this->input->post();
@@ -101,68 +119,6 @@ class Dexapp extends CI_Controller {
 	// 		->set_output(json_encode($this->UserInfo->users($data)),
 	// 									JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 	// }
-	public function auth()
-	{
-		//$data = array('username'=>'dexterity','password'=>'cold@123');
-
-		$data = $this->input->post();
-		$data['key'] = 'GET';
-		$data['single_q'] = 'true';	
-		$info = $this->UserInfo->users($data);
-		$err = array('error_login' => 'Invalid Username Or Password');	
-		switch($info){
-			case FALSE:
-				 $this->output
-					 ->set_status_header(200)
-					 ->set_header('Content-type:application/json')
-					 ->set_output(json_encode(array('err' =>$err)),
-													 JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-				
-			break;
-					
-			default:
-					
-			$passmatch = password_verify($data['password'],$info[ 0 ]['password']);
-				switch($passmatch)
-					{
-					case FALSE:
-						$this->output
-							->set_status_header(200)
-							->set_header('Content-type:application/json')
-							->set_output(json_encode(array('err' => $err)),
-														JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-						break;
-						
-					case TRUE:
-						$items = array(
-								'username' => $info[ 0 ]['username'],
-								'email' => $info[ 0 ]['email'],
-								'role' => $info[ 0 ]['role'],
-								 'logged_in' => TRUE
-						);
-						switch($info[ 0 ]['role'])
-							{
-							case 'Admin':
-								$this->output
-								->set_status_header(200)
-								->set_header('Content-type:application/json')
-								->set_output(json_encode(array('success' => 'TRUE','location' => 'admin')),
-															JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-								//$this->session->set_userdata($items);
-							break;
-							
-							case 'Client':
-								$this->output
-								->set_status_header(300)
-								->set_header('Content-type:application/json')
-								->set_output(json_encode(array('success' => 'TRUE','location' => 'client')),
-															JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-								//$this->session->set_userdata($items);
-								break;		
-								}
-					}
-				}
-	}
 
 	
 }

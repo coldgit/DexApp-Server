@@ -23,12 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-<<<<<<< HEAD
+
 //$config['base_url'] = 'http://127.0.0.1:8080/DexApp-Server/';
 $config['base_url'] = 'http://'.$_SERVER['HTTP_HOST'].'/DexApp-Server/';
-=======
-$config['base_url'] = 'http://127.0.0.1:8080/DexApp-Server/';
->>>>>>> fa18cc0080ea5d496ed2b39fd5b580d481cdfcc7
 
 /*
 |--------------------------------------------------------------------------
