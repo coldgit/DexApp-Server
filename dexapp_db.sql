@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `anime` (
   `anime_id` int(100) NOT NULL,
   `ani_title` text,
+  `img_src` text,
   `summary` text,
   `date_time` text,
   `ani_url` text NOT NULL
