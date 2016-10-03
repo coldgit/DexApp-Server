@@ -59,7 +59,8 @@ $route['auth'] = 'dexapp/Login';
 
 $route['Checker?(:any)']= 'dexapp/checker/$1';
 
-$route['animes/(:any)']	= 'animes/_animes/$1';
+$route['anime/(:any)']	= 'Animes_Ctrl/anime_c/$1';
+$route['anime']	= 'Animes_Ctrl/anime_c';
 //DELETE METHODs
 // $route['delete?(:any)']['DELETE'] = 'dexapp/deleteUser/$1';
 

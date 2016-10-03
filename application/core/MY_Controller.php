@@ -32,6 +32,7 @@ class MY_Controller extends CI_Controller
 
 	public function _resp($data)
 	{
+		
 		$this->output
 			->set_status_header($data['status_code'])
 			->set_header('Content-type:application/json')
