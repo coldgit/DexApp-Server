@@ -51,16 +51,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'dexapp';
 
-$route['users?(:any)'] = 'dexapp/users/$1';
-
+$route['users/(:any)'] = 'dexapp/users/$1';
+$route['users'] = 'dexapp/users';
 //$route['(:any)'] = 'dexapp/profile/$1';
 
-$route['Auth'] = 'dexapp/Login';
+$route['auth'] = 'dexapp/Login';
 
 $route['Checker?(:any)']= 'dexapp/checker/$1';
 
-
-//DELETE METHOD
+$route['animes/(:any)']	= 'animes/_animes/$1';
+//DELETE METHODs
 // $route['delete?(:any)']['DELETE'] = 'dexapp/deleteUser/$1';
 
 $route['404_override'] = '';

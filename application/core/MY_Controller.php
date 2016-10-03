@@ -30,12 +30,12 @@ class MY_Controller extends CI_Controller
 		parent::__construct();
 	}
 
-	public function _resp($stat,$out)
+	public function _resp($data)
 	{
 		$this->output
-			->set_status_header($stat)
+			->set_status_header($data['status_code'])
 			->set_header('Content-type:application/json')
-			->set_output(json_encode($out),
+			->set_output(json_encode($data['data']),
 			JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 	}
 	

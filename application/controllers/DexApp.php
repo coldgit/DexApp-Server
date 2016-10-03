@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 //base controller
-class Dexapp extends MY_Controller
+class DexApp extends MY_Controller
 {
 
 	public function __construct()
@@ -17,33 +17,34 @@ class Dexapp extends MY_Controller
 
 	public function checker()
 	{
-		$data = $this->input->post();
+		$data = $this->input->get();
 		$data['key'] = 'GET';
-		$data['single_q'] = (empty($_POST['username']))? 'false':'true';
-		if(!$this->UserInfo->users($data))
+		$data['single_q'] = (empty($_GET['username']))? 'false':'true';
+		if(!$this->UserInfo->users($data)['data'])
 		{
-				$out = array('check' => true);
+				$data = array('status_code' => '200','data' => array('check' => true));
 		}else{
-				$out = array('check' => false);
+				$data = array('status_code' => '200','data' => array('check' => false));
 		}
-		$this->_resp(200,$out);
+		$this->_resp($data);
 	}
 
-	public function users(){
+	public function users($username = null){
 		$data = array(
 					'key' => $_SERVER['REQUEST_METHOD'], 
-					'method' => (strtolower($_SERVER['REQUEST_METHOD']) == 'delete' || strtolower($_SERVER['REQUEST_METHOD']) == 'put')? 'get': strtolower($_SERVER['REQUEST_METHOD'])
+					'method' => (strtolower($_SERVER['REQUEST_METHOD']) == 'put')? 'get': strtolower($_SERVER['REQUEST_METHOD'])
 					);
+		//var_dump($username);
 		if($data['key'] == 'POST')
 		{
 			$data += $this->input->$data['method']()+array('role' => 'Client','created' => date('Y-m-d H:i:s') );
 		}elseif($data['key'] == 'GET')
 		{
-			$data += $this->input->$data['method']()+array('single_q' => (empty($_GET['username']))? 'false':'true');
+			$data += $this->input->$data['method']()+array('single_q' => (($username == null)? 'false':'true'),'username' => $username );
 		}else{
-			$data += $this->input->$data['method']();
+			$data= array('username'=> $username,'key' => $_SERVER['REQUEST_METHOD']);
 		}
-		$this->_resp(200,$this->UserInfo->users($data));
+		$this->_resp($this->UserInfo->users($data));
 		
 	}
 	
@@ -52,12 +53,13 @@ class Dexapp extends MY_Controller
 		//$data = array('username'=>'dexterity','password'=>'cold@123');
 
 		$data = $this->input->post()+array('key' => 'GET','single_q' => 'true');
-		$info = $this->UserInfo->users($data);
-		$err = array('error_login' => 'Invalid Username Or Password');	
+		// var_dump($data);
+		$info = $this->UserInfo->users($data)['data'];
+		$data_err = array('status_code'=> '300','data' => array('err' => array('error_login' => 'Invalid Username Or Password')));	
 		switch($info)
 		{
 			case FALSE:
-				$this->_resp(200,array('err' =>$err));	
+				$this->_resp($data_err);	
 			break;
 					
 			default:
@@ -66,7 +68,7 @@ class Dexapp extends MY_Controller
 				switch($passmatch)
 				{
 					case FALSE:
-						$this->_resp(200,array('err' =>$err));	
+						$this->_resp($data_err);	
 						break;
 						
 					case TRUE:
@@ -79,12 +81,14 @@ class Dexapp extends MY_Controller
 						switch($info[ 0 ]['role'])
 						{
 							case 'Admin':
-								$this->_resp(200,array('success' => 'TRUE','location' => 'admin'));
+								$data = array('status_code' => '200','data' => array('success' => 'TRUE','location' => 'admin'));
+								$this->_resp($data);
 								//$this->session->set_userdata($items);
 							break;
 							
 							case 'Client':
-							$this->_resp(300,array('success' => 'TRUE','location' => 'client'));
+							$data = array('status_code' => '200','data' => array('success' => 'TRUE','location' => 'client'));
+							$this->_resp($data);
 								//$this->session->set_userdata($items);
 								break;		
 						}

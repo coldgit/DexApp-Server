@@ -37,7 +37,7 @@ return {
     },
     getUsers:function()
     {
-        var url = base_url+'/DexApp-Server/users';
+        var url = base_url+'/DexApp-Server/users/';
          $http({
              method:'GET',
              url:url,
@@ -56,7 +56,7 @@ return {
     },
     deleteUser:function(username)
     {
-        var url = base_url+'/DexApp-Server/users?username=';
+        var url = base_url+'/DexApp-Server/users/';
            $http({
             method:'DELETE',
             url:url+username,
@@ -72,7 +72,7 @@ return {
     },
     getUser:function(username) //get single info in users list
     {
-      var url = base_url+'/DexApp-Server/users?username='+username;
+      var url = base_url+'/DexApp-Server/users/'+username;
            $http({
             method:'GET',
             url:url,
@@ -89,7 +89,7 @@ return {
     login:function(data)
     { 
       console.log(data);
-      var url = base_url+'/DexApp-Server/dexapp/auth';
+      var url = base_url+'/DexApp-Server/auth';
            $http({
               method:'POST',
               url:url,
@@ -97,17 +97,18 @@ return {
               data:$httpParamSerializerJQLike(data),
             }).then(
               function(resp){
-                  console.log(resp.data.err);
-                  $rootScope.error_login = resp.data.err.error_login;
+                  console.log(resp.data);
+                 // $rootScope.error_login = resp.data.err.error_login;
               },
               function(err){
-               console.log(err);
+                  console.log(err.data.err);
+                  $rootScope.error_login = err.data.err.error_login;
               });
     },
     check:function(username){
        $http({
              method:'GET',
-             url:base_url+'/DexApp-Server/dexapp/checker?username='+username,
+             url:base_url+'/DexApp-Server/dexapp/Checker?username='+username,
             // headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
           //   params:{username:username},
            }).then(

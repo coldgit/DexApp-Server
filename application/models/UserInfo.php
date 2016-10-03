@@ -20,7 +20,7 @@ class UserInfo extends CI_Model {
 												VALUES('{$data['username']}','{$pwd}','{$data['email']}','{$data['role']}','{$data['created']}' )
 												");
 					$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");
-						return $query->result_array();
+						return array('status_code'=>'200','data' => $query->result_array());
 				break;
 			case 'GET':
 					//print_r($data);
@@ -31,18 +31,18 @@ class UserInfo extends CI_Model {
 							$query = $this->db->query("SELECT user_id,username,email,password,role FROM userinfo WHERE username = '{$data['username']}'");
 							if($query->num_rows() === 1)
 							{
-								return $query->result_array();
+								return array('status_code'=>'200','data' => $query->result_array());
 							}else{
-								return false;
+								return array('status_code'=>'200','data' =>false);
 							}
 						}else{
 							$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");
-						return $query->result_array();
+						return array('status_code'=>'200','data' => $query->result_array() );
 						}
 
 					}else{
 						$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");
-						return $query->result_array();
+						return array('status_code'=>'200','data' =>$query->result_array());
 					}
 				break;
 			case 'PUT':
@@ -51,7 +51,7 @@ class UserInfo extends CI_Model {
 			case 'DELETE':
 					$this->db->query("DELETE FROM userinfo WHERE username = '{$data['username']}'");
 					$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");
-						return $query->result_array();
+						return array('status_code'=>'200','data' =>$query->result_array());
 				break;
 			}
 
