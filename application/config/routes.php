@@ -64,6 +64,12 @@ $route['anime']	= 'Animes_Ctrl/anime_c';
 //DELETE METHODs
 // $route['delete?(:any)']['DELETE'] = 'dexapp/deleteUser/$1';
 
+$route['anime/(:any)/episodes'] = 'Animes_epi_Ctrl/animes_epi_/$1';
+$route['anime/(:any)/episode/(:any)'] = 'Animes_epi_Ctrl/animes_epi_/$1/$2';
+
+
+$route['episode/(:any)/comments']	= 'Animes_comment_Ctrl/animes_comment/$1';
+$route['episode/(:any)/comment/(:any)'] = 'Animes_comment_Ctrl/animes_comment/$1/$2';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

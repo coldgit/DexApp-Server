@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//base controller
 class Animes_Ctrl extends MY_Controller
 {
 
