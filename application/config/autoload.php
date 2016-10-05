@@ -126,4 +126,6 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('UserInfo','Animes_model');
+$autoload['model'] = array('UserInfo','Animes_model',
+	'Animes_epi_model',
+	'Animes_comment_model');

@@ -11,7 +11,8 @@ class Animes_epi_Ctrl extends MY_Controller
 
 	public function animes_epi_($title=null,$epi=null)
 	{
-		$data = array('title' => $title, 'epi' => $epi ,'key' => $_SERVER['REQUEST_METHOD']);
+		$data = array('ani_title' => $title, 'episode' => $epi ,'key' => $_SERVER['REQUEST_METHOD'],
+			'data' => array());
 		switch ($_SERVER['REQUEST_METHOD']) {
 			case 'POST':
 					$this->__insert_epi($data);
@@ -37,22 +38,24 @@ class Animes_epi_Ctrl extends MY_Controller
 
 	public function __insert_epi($data)
 	{
-		var_dump($data);
+		$data['data'] += $this->input->post()+array('date_time' => date('Y-m-d H:i:s'));
+		$this->_resp($this->Animes_epi_model->episode_($data));
 	}
 
 	public function __retrieve_epi($data)
 	{
-		var_dump($data);
+		$this->_resp($this->Animes_epi_model->episode_($data));
 	}
 
 	public function __update_epi($data)
 	{
-		var_dump($data);
+		$data['data'] += $this->input->get()+array('date_time' => date('Y-m-d H:i:s'));
+		$this->_resp($this->Animes_epi_model->episode_($data));
 	}
 
 	public function __remove_epi($data)
 	{
-		var_dump($data);
+		$this->_resp($this->Animes_epi_model->episode_($data));
 	}
 
 	

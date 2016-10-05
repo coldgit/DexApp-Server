@@ -11,7 +11,8 @@ class Animes_comment_Ctrl extends MY_Controller
 	
 	public function animes_comment($epi=null,$com_id=null)
 	{
-		$data = array('epi' => $epi, 'com_id' => $com_id,'key' => $_SERVER['REQUEST_METHOD']);
+		$data = array('epi' => $epi, 'com_id' => $com_id,'key' => $_SERVER['REQUEST_METHOD'],
+			'data' => array());
 		switch ($_SERVER['REQUEST_METHOD']) {
 			case 'POST':
 					$this->__insert_comment($data);
@@ -37,22 +38,24 @@ class Animes_comment_Ctrl extends MY_Controller
 
 	public function __insert_comment($data)
 	{
-		var_dump($data);
+		$data['data'] += $this->input->post()+array('date_time' => date('Y-m-d H:i:s'));
+		
+		$this->_resp($this->Animes_comment_model->comment_($data));
 	}
 	
 	public function __retrieve_comment($data)
 	{
-		var_dump($data);
+		$this->_resp($this->Animes_comment_model->comment_($data));
 	}
 	
 	public function __update_comment($data)
 	{
-		var_dump($data);
+		$this->_resp($this->Animes_comment_model->comment_($data));
 	}
 	
 	public function __remove_comment($data)
 	{
-		var_dump($data);
+		$this->_resp($this->Animes_comment_model->comment_($data));
 	}
 
 

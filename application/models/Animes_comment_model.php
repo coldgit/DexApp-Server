@@ -12,16 +12,16 @@ class Animes_comment_model extends CI_Model {
 	{
 		switch ($data['key']) {
 			case 'POST':
-				$this->_new_comment($data);
+				return $this->_new_comment($data);
 				break;
 			case 'GET':
-				$this->_retrieve_comment($data);
+				return $this->_retrieve_comment($data);
 				break;
 			case 'PUT':
-				$this->_update_comment($data);
+				return $this->_update_comment($data);
 				break;
 			case 'DELETE':
-				$this->_remove_comment($data);
+				return $this->_remove_comment($data);
 				break;
 			
 			default:
@@ -32,7 +32,8 @@ class Animes_comment_model extends CI_Model {
 
 	public function _new_comment($data)
 	{
-		return $data;
+		$data['data']+=array()
+		var_dump($data);
 	}
 	
 	public function _retrieve_comment($data)
