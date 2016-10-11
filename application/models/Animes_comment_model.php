@@ -32,7 +32,7 @@ class Animes_comment_model extends CI_Model {
 
 	public function _new_comment($data)
 	{
-		$data['data']+=array()
+		$data['data']+=array();
 		var_dump($data);
 	}
 	
