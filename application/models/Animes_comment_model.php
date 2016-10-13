@@ -38,17 +38,16 @@ class Animes_comment_model extends CI_Model {
 	
 	public function _retrieve_comment($data)
 	{
-		return $data;
+		var_dump($data);
 	}
 	
 	public function _update_comment($data)
 	{
-		return $data;
+		var_dump($data);
 	}
 	
 	public function _remove_comment($data)
 	{
-		return $data;
+		var_dump($data);
 	}
-	
 }
