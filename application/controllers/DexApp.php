@@ -8,6 +8,7 @@ class DexApp extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		echo header('asdasd');
 	}
 
 	public function index()
@@ -122,5 +123,26 @@ class DexApp extends MY_Controller
 		
 	// }
 
+	public function generate_token($data_post)
+	{
+	    $CONSUMER_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+	    $data = array('issuedAt'=>date(DATE_ISO8601, strtotime("now")),'ttl'=> ' 86400')+$data_post;
+	    // $data = array('status_code' => '200', 'data' => 
+	    return $this->jwt->encode($data, $CONSUMER_SECRET);
+	    // );
+
+	   // $this->_resp($data);
+	}
+
+	public function extract_token()
+	{
+	    // $CONSUMER_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+	    $CONSUMER_SECRET = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+	    // var_dump($this->input->post());
+	    $CONSUMER_TTL = 86400;
+	    $data = array('status_code' => '200', 'data' => $this->jwt->decode($this->generate_token($this->input->post()),$CONSUMER_SECRET));
+
+	    $this->_resp($data);
+	}
 	
 }
