@@ -95,6 +95,7 @@ angular.module('dexapp_server.controllers',[])
 		}
 })
 .controller('upCtrl',function($scope,$http){
+  $scope.image = "img/logo.png";
   $scope.submit_img = function()
   {     
         var fd = new FormData();
@@ -108,7 +109,8 @@ angular.module('dexapp_server.controllers',[])
                 transformRequest: angular.identity,
                 data: fd
               }).then(function(resp){
-                console.log(resp.data);
+                console.log(resp.data.upload_data.file_name);
+                $scope.image =resp.data.upload_data.file_name;
               },function(err){
                 console.log(err.data);
               });

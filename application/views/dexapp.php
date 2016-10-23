@@ -57,9 +57,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<reglist></reglist>
 	</div> -->
 	<div ng-controller="upCtrl" enctype="multipart/form-data">
-		<form ng-submit="submit_img()" >
-		<input type="file" name="userfile" id="f" ng-model="itemData.userfile">
-		<input type="submit" value="upload" />		
+		<input type="file" name="userfile" id="f" ng-model="itemData.userfile" onchange="angular.element(this).scope().submit_img()">
+		<img src="uploads/{{image}}">
 	</form>		
 	</div>
 	
