@@ -24,38 +24,45 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body ng-app="dexapp_server">
-	<div class="container">
+		<!-- <div class="container">
 
-		<div class="jumbotron" >
+			<div class="jumbotron" >
 
-			<h1  class="title-home">Welcome to <img class="logo"src="<?=base_url('uploads/img/logo.png');?>"></h1>
-		</div>
-		<div class="row">
-			<carousel></carousel>
-
-		
-			<div class="col-md-5">
-				 <form name="outerForm" class="tab-form-demo">
-				    <uib-tabset active="activeForm">
-				      <uib-tab index="0" heading="Login">
-				      	<br>
-				      	<logform></logform>
-				      </uib-tab>
-				      <uib-tab index="1" heading="Register Now!">
-				      <br>
-				        <regform></regform>
-				      </uib-tab>
-				      	
-				    </uib-tabset>
-				  </form>
-
+				<h1  class="title-home">Welcome to <img class="logo"src="<?//=base_url('uploads/img/logo.png');?>"></h1>
 			</div>
-		
-		</div>	
-</div>
+				<div class="row">
+					<carousel></carousel>
+
+				
+					<div class="col-md-5">
+						 <form name="outerForm" class="tab-form-demo">
+						    <uib-tabset active="activeForm">
+						      <uib-tab index="0" heading="Login">
+						      	<br>
+						      	<logform></logform>
+						      </uib-tab>
+						      <uib-tab index="1" heading="Register Now!">
+						      <br>
+						        <regform></regform>
+						      </uib-tab>
+						      	
+						    </uib-tabset>
+						  </form>
+
+					</div>
+				
+				</div>	
+	</div>
 		
 		<reglist></reglist>
+	</div> -->
+	<div ng-controller="upCtrl" enctype="multipart/form-data">
+		<form ng-submit="submit_img()" >
+		<input type="file" name="userfile" id="f" ng-model="itemData.userfile">
+		<input type="submit" value="upload" />		
+	</form>		
 	</div>
+	
 </body>
 	<!--JavaScript-->
 	 <?php foreach ($scripts as $script):?>

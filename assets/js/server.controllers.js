@@ -93,4 +93,26 @@ angular.module('dexapp_server.controllers',[])
 			UsersList.login($scope.logData);
 			$scope.logData = {};
 		}
+})
+.controller('upCtrl',function($scope,$http){
+  $scope.submit_img = function()
+  {     
+        var fd = new FormData();
+        fd.append('userfile',document.getElementById('f').files[0]);
+        console.log(fd.getAll('userfile'));
+        $http({
+                method: 'POST',
+                url: 'http://localhost/DexApp-Server/upload/do_upload',
+                withCredentials: true,
+                headers: { 'Content-Type': undefined },
+                transformRequest: angular.identity,
+                data: fd
+              }).then(function(resp){
+                console.log(resp.data);
+              },function(err){
+                console.log(err.data);
+              });
+     
+  }
+  
 });
