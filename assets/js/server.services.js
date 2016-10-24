@@ -1,6 +1,6 @@
 var base_url = window.location.protocol+'//'+window.location.host;
 console.log(base_url);
-angular.module('dexapp_server.services', []).factory('UsersList', function($http,$httpParamSerializerJQLike,$rootScope) {
+angular.module('dexapp_server.services', []).factory('UsersList', function($location,$http,$httpParamSerializerJQLike,$rootScope) {
     
     var img = [{ image: base_url+'/DexApp-Server/uploads/img/1-op.jpg',id:0,text:'One Piece'},
                 { image: base_url+'/DexApp-Server/uploads/img/2-nanatsu.jpg',id:1,text:'Nanatsu No Taizai'},
@@ -96,6 +96,8 @@ return {
             }).then(
               function(resp){
                   console.log(resp.data);
+                  $location.path(resp.data.location);
+
                  // $rootScope.error_login = resp.data.err.error_login;
               },
               function(err){

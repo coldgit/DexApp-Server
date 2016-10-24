@@ -21,60 +21,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	.logo:hover{opacity: 0.8}
 	.user-error{color:#f00;}
 	.d_success{color:green;}
+	@media screen and (min-width: 768px){.jumbotron { padding-top: 10px !important; padding-bottom: 10px  !important;}}
+	
 	</style>
 </head>
 <body ng-app="dexapp_server">
-		
-		<!-- <div class="container">
-
-			<div class="jumbotron" >
-
-				<h1  class="title-home">Welcome to <img class="logo"src="<?//=base_url('uploads/img/logo.png');?>"></h1>
-			</div>
-				<div class="row">
-					<carousel></carousel>
-
-				
-					<div class="col-md-5">
-						 <form name="outerForm" class="tab-form-demo">
-						    <uib-tabset active="activeForm">
-						      <uib-tab index="0" heading="Login">
-						      	<br>
-						      	<logform></logform>
-						      </uib-tab>
-						      <uib-tab index="1" heading="Register Now!">
-						      <br>
-						        <regform></regform>
-						      </uib-tab>
-						      	
-						    </uib-tabset>
-						  </form>
-
-					</div>
-				
-				</div>	
-	</div>
+		<ui-view>
+		</ui-view>
+		<!--	 
 		
 		<reglist></reglist>
 	</div> -->
-	<!-- <div class="container">
-		<div class="col-md-12">
-			 <form name="outerForm" class="tab-form-demo">
-			    <uib-tabset active="active">
-			      <uib-tab index="0" heading="New Anime">
-			      	<br>
-			      	<newanime></newanime>	
-			      	<listanime></listanime>
-			      </uib-tab>
-				     <uib-tab index="1" heading="Update Episodes">
-				      <br>
-				        <newepisode></newepisode>
-						<listepisode></listepisode>
-				      </uib-tab>
-			    </uib-tabset>
-			  </form>
-		</div>
-	</div> -->
+	<!--  -->
 </body>
 	<!--JavaScript-->
 	 <?php foreach ($scripts as $script):?>

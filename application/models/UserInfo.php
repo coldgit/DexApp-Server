@@ -19,7 +19,7 @@ class UserInfo extends CI_Model {
 												userinfo(username,password,email,role,acc_created)
 												VALUES('{$data['username']}','{$pwd}','{$data['email']}','{$data['role']}','{$data['created']}' )
 												");
-					$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");
+					$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo WHERE role != 'Admin'");
 						return array('status_code'=>'200','data' => $query->result_array());
 				break;
 			case 'GET':
@@ -28,7 +28,7 @@ class UserInfo extends CI_Model {
 					{
 						if(isset($data['username']))
 						{
-							$query = $this->db->query("SELECT user_id,username,email,password,role FROM userinfo WHERE username = '{$data['username']}'");
+							$query = $this->db->query("SELECT user_id,username,email,password,role FROM userinfo WHERE username = '{$data['username']}'  WHERE role != 'Admin' ");
 							if($query->num_rows() === 1)
 							{
 								return array('status_code'=>'200','data' => $query->result_array());
@@ -36,12 +36,12 @@ class UserInfo extends CI_Model {
 								return array('status_code'=>'200','data' =>false);
 							}
 						}else{
-							$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");
+							$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo  WHERE role != 'Admin'");
 						return array('status_code'=>'200','data' => $query->result_array() );
 						}
 
 					}else{
-						$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");
+						$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo  WHERE role != 'Admin'");
 						return array('status_code'=>'200','data' =>$query->result_array());
 					}
 				break;
@@ -50,41 +50,11 @@ class UserInfo extends CI_Model {
 				break;
 			case 'DELETE':
 					$this->db->query("DELETE FROM userinfo WHERE username = '{$data['username']}'");
-					$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo");
+					$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo  WHERE role != 'Admin'");
 						return array('status_code'=>'200','data' =>$query->result_array());
 				break;
 			}
 
 	}
 	
-	// public function updateUser($data)
-	// {	
-	// 	$data = $data+array('key' => 'GET','single_q' => 'true');
-		
-	// 	$up = $this->users($data);
-	// 	var_dump($up);
-	// 	$info = array(
-	// 			'username' => array('username',((isset($data['username']))? $data['username']:$up['username'])), 
-	// 			'password' => array('password',((isset($data['password']))? password_hash($data['password'],PASSWORD_BCRYPT) : $up['password'])),
-	// 			'email'	   => array('email' ,((isset($data['email']))? $data['email']: $up[0]['email'])));
-		
-	// 	foreach ($info as $x) 
-	// 	{
-	// 		switch (isset($x[1])) 
-	// 		{
-	// 			case 1:
-	// 				$this->db->query("UPDATE userinfo SET $x[0] = '{$x[1]}' WHERE user_id = '{$up[0]['user_id']}' ");
-	// 				return true;
-	// 				break;
-				
-	// 			default:
-	// 				echo 'false';
-	// 				break;
-	// 		}
-			
-	// 	}
-		
-//	}
-
-
 }
