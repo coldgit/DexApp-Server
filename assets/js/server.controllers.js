@@ -94,27 +94,62 @@ angular.module('dexapp_server.controllers',[])
 			$scope.logData = {};
 		}
 })
-.controller('upCtrl',function($scope,$http){
-  $scope.image = "img/logo.png";
-  $scope.submit_img = function()
+.controller('AnimeCtrl',function($scope,$http,$rootScope,Anime){
+  $rootScope.image = "img/logo.png";
+  $scope._img = function()
   {     
         var fd = new FormData();
+        
         fd.append('userfile',document.getElementById('f').files[0]);
-        console.log(fd.getAll('userfile'));
-        $http({
-                method: 'POST',
-                url: 'http://localhost/DexApp-Server/upload/do_upload',
-                withCredentials: true,
-                headers: { 'Content-Type': undefined },
-                transformRequest: angular.identity,
-                data: fd
-              }).then(function(resp){
-                console.log(resp.data.upload_data.file_name);
-                $scope.image =resp.data.upload_data.file_name;
-              },function(err){
-                console.log(err.data);
-              });
-     
+        Anime.uploadImg_anime(fd);
+
   }
-  
+  $scope.submit_anime = function()
+  {
+    $scope.animeData.img_src = "uploads/"+$rootScope.image;
+    Anime.new_anime($scope.animeData);  
+    $rootScope.image = "";
+    $scope.animeData = {};
+    document.getElementById('f').value = "";
+  }
+  Anime.list_anime();
+  $scope.delete_anime = function(ani_title)
+  {
+    Anime.delete_anime(ani_title);
+  }
+})
+.controller('EpisodeCtrl',function($scope,$http,Anime,$rootScope,Episode){
+  Anime.list_anime();
+   $rootScope.vid = true;
+   $scope._video = function()
+  {     
+        var fd = new FormData();
+        $rootScope.video = "";
+        fd.append('userfile',document.getElementById('video').files[0]);
+        console.log(fd.getAll('userfile'));
+        Episode.uploadVideo_anime(fd);
+
+  }
+  $scope.episode = function()
+  {
+    $scope.Episode.epi_src = $rootScope.video;
+    Episode.new_episode($scope.title.ani_title.replace(/\s+/g, '-'),$scope.Episode);
+    $scope.Episode = {};
+    $scope.title = "";
+    document.getElementById('video').value = "";
+    $rootScope.vid = true;
+  }
+  $scope.list_episodes = function(title)
+  {
+    Episode.list_episodes(title.replace(/\s+/g, '-'));
+  }
+  $scope.delete_episode = function(title,id)
+  {
+    title = title.replace(/\s+/g, '-');
+    console.log(title,id);
+    Episode.delete_episode(title,id);
+  }
+})
+.controller('CommentCtrl',function(){
+
 });

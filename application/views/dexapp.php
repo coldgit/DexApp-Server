@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body ng-app="dexapp_server">
+		
 		<!-- <div class="container">
 
 			<div class="jumbotron" >
@@ -56,12 +57,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		<reglist></reglist>
 	</div> -->
-	<div ng-controller="upCtrl" enctype="multipart/form-data">
-		<input type="file" name="userfile" id="f" ng-model="itemData.userfile" onchange="angular.element(this).scope().submit_img()">
-		<img src="uploads/{{image}}">
-	</form>		
-	</div>
-	
+	<!-- <div class="container">
+		<div class="col-md-12">
+			 <form name="outerForm" class="tab-form-demo">
+			    <uib-tabset active="active">
+			      <uib-tab index="0" heading="New Anime">
+			      	<br>
+			      	<newanime></newanime>	
+			      	<listanime></listanime>
+			      </uib-tab>
+				     <uib-tab index="1" heading="Update Episodes">
+				      <br>
+				        <newepisode></newepisode>
+						<listepisode></listepisode>
+				      </uib-tab>
+			    </uib-tabset>
+			  </form>
+		</div>
+	</div> -->
 </body>
 	<!--JavaScript-->
 	 <?php foreach ($scripts as $script):?>

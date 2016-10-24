@@ -10,11 +10,11 @@ class Upload extends My_Controller {
         public function do_upload()
         {               
 
-                $config['upload_path']          = './uploads/';
-                $config['allowed_types']        = 'gif|jpg|png|mp4';
-                $config['max_size']             = 2560;
-                $config['max_width']            = 2560;
-                $config['max_height']           = 2560;
+                $config['upload_path']          = './uploads';
+                $config['allowed_types']        = 'jpg|png|mp4';
+                $config['max_size']             = 0;
+                $config['max_width']            = 0;
+                $config['max_height']           = 0;
 
                 $this->load->library('upload', $config);
 
@@ -31,4 +31,6 @@ class Upload extends My_Controller {
                         // $this->load->view('upload_success', $data);
                 }
         }
+
+         
 }

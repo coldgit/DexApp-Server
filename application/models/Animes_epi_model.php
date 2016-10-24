@@ -78,7 +78,13 @@ class Animes_epi_model extends CI_Model {
 	public function _remove_epi($data)
 	{
 		$query = $this->db->delete('anime_video', array('episode_id' => $this->_retrieve_epi($data)['data'][0]['episode_id']));
-		return array('status_code' => '200','data' => $query);
+		if($query)
+		{
+			$anime_id = $this->db->get_where('anime', array('ani_url' => $data['ani_title']));
+			$query = $this->db->get_where('anime_video', array('anime_id' => $anime_id->result_array()[0]['anime_id']));
+			// $query = $this->_retrieve_epi($data);
+		}
+		return array('status_code' => '200','data' => $query->result_array());
 	}
 	
 }

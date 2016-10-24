@@ -1,5 +1,4 @@
-angular.module('dexapp_server.directive',[])
-.directive('logform', function() {
+angular.module('dexapp_server.directive',[]).directive('logform', function() {
   return {
      restrict: 'E',
     template:
@@ -107,5 +106,101 @@ angular.module('dexapp_server.directive',[])
           +'</div>'
         +'</div>'
     };
+}).directive('newanime',function(){
+    return{
+        restrict:'E',
+        template:   '<div class="col-md-4" ng-controller="AnimeCtrl">'
+                      +'<form enctype="multipart/form-data" ng-submit="submit_anime()" >'
+                        +'<div class="form-group">'
+                            +'<label>Title</label>'
+                            +'<input class="form-control" type="text" name="title" ng-model="animeData.ani_title" required>'
+                        +'</div>'
+                        +'<div class="form-group">'
+                             +'<label>Summary</label>'
+                              +'<textarea class="form-control" ng-model="animeData.summary" rows="5"></textarea>'
+                        +'</div>'
+                        +'<div class="form-group">'
+                            +'<input type="file" name="userfile" id="f" ng-model="itemData.userfile" onchange="angular.element(this).scope()._img()">'
+                            +'<img width="128px" height="128px" src="uploads/{{image}}">'
+                        +'</div>'
+                        +'<button type="submit" class="btn btn-sm btn-info">Submit</button>'
+                      +'</form>'
+                    +'</div>'
+    }
+})
+.directive('listanime',function(){
+    return{
+      restrict:'E',
+        template: '<div class="col-md-7" ng-controller="AnimeCtrl">'
+                        +'<table class="table table-reponsive">'
+                            +'<thead>'
+                                +'<tr>'
+                                    +'<th>title</th>'
+                                    +'<th>Date Time</th>'
+                                    +'<th>Actions</th>'
+                                +'</tr>'
+                            +'</thead>'
+                            +'<tbody>'
+                                +'<tr ng-repeat="x in animes.slice(((currentPage-1)*10), ((currentPage)*10))">'
+                                    +'<td>{{x.ani_title}}</td>'
+                                    +'<td>{{x.date_time}}</td>'
+                                    +'<td><button type="button" ng-click="delete_anime(x.ani_url)" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>'
+                                +'</tr>'
+                            +'</tbody>'
+                        +'</table>'
+                    +'<div >'     
+                        +'<ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" direction-links="true" num-pages="numPages"></ul>'
+                    +'</div>'
+    }
+})
+.directive('newepisode',function(){
+    return{
+      restrict:'E',
+        template:  '<div class="col-md-3" ng-controller="EpisodeCtrl">'
+                        +'<form enctype="multipart/form-data" ng-submit="episode()">'
+                            +'<div class="form-group">'
+                                +'<label>Title</label>'
+                                +'<select class="form-control" ng-model="title.ani_title" ng-options="anime.ani_title as anime.ani_title for anime in animes" reuired></select>'
+                            +'</div>'
+                             +'<div class="form-group">'
+                                +'<label>Episode</label>'
+                                +'<input type="text" name="episode" ng-model="Episode.episode" required>'
+                            +'</div>'
+                            +'<div class="form-group">'
+                                +'<input type="file" name="userfile" id="video" ng-model="Episode.userfile" onchange="angular.element(this).scope()._video()">'
+                            +'</div>'
+                                +'<button type="submit" ng-disabled="vid" class="btn btn-sm btn-info">Submit</button>'
+                        +'</form>'
+                    +'</div>'
+    }
+})
+.directive('listepisode',function(){
+    return{
+        restrict:'E',
+        template: '<div class="col-md-7" ng-controller="EpisodeCtrl">'
+                    +'<div class="form-group">'
+                        +'<label>Title</label>'
+                        +'<select class="form-control" ng-model="title.ani_title" ng-options="anime.ani_title as anime.ani_title for anime in animes" ng-change="list_episodes(title.ani_title)" required></select>'
+                    +'</div>'
+                    +'<table class="table table-reponsive">'
+                        +'<thead>'
+                            +'<tr>'
+                                +'<th>Episode</th>'
+                                +'<th>Date Time</th>'
+                                +'<th>Actions</th>'
+                            +'</tr>'
+                        +'</thead>'
+                        +'<tbody>'
+                            +'<tr ng-repeat="x in episodes.slice(((currentPage-1)*10), ((currentPage)*10))">'
+                                +'<td>{{x.episode}}</td>'
+                                +'<td>{{x.date_time}}</td>'
+                                +'<td><td><button type="button" ng-click="delete_episode(title.ani_title,x.episode)" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i></button></td>'
+                            +'</tr>'
+                        +'</tbody>'
+                    +'</table>'
+                    +'<div>'            
+                    +'<ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" direction-links="true" num-pages="numPages"></ul>'
+                    +'</div>'
+                    +'</div> '
+    }
 });
-
