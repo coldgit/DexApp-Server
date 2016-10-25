@@ -45,5 +45,14 @@ angular.module('dexapp_server.routes',[])
 
 
   // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider
+    .when('users/:any','/home')
+    .when('users','/home')
+    .when('anime','/home')
+    .when('anime/:any1/episodes','/home')
+    .when('episode/:any2/comments','home')
+    .when('episode/:any3/comment/:any4','/home')
+    .when('auth','/home')
+    .when('Checker?:any5','/home')
+    .otherwise('/home');
 });

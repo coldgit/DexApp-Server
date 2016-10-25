@@ -19,6 +19,7 @@ class UserInfo extends CI_Model {
 												userinfo(username,password,email,role,acc_created)
 												VALUES('{$data['username']}','{$pwd}','{$data['email']}','{$data['role']}','{$data['created']}' )
 												");
+					$this->db->insert('gallery',array('username' => $data['username'],'img_src' => 'uploads/default.png','status' => true));
 					$query =   $this->db->query("SELECT username,email,role,acc_created FROM userinfo WHERE role != 'Admin'");
 						return array('status_code'=>'200','data' => $query->result_array());
 				break;
