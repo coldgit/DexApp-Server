@@ -204,4 +204,46 @@ angular.module('dexapp_server.directive',[])
                     +'</div>'
                     +'</div> '
     }
+})
+.directive('adminnav',function(){
+    return{
+        restrict:'E',
+        template:'<nav class="navbar navbar-inverse">'
+                    +'<div class="container">'
+                        +'<div class="container-fluid">'
+                            +'<div class="navbar-header">'
+                                +'<a class="navbar-brand" href="#/admin">DexApp</a>'
+                            +'</div>'
+                        +'<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">'
+                            +'<ul class="nav navbar-nav navbar-right">'
+                                +'<li><a href="#/anime">Animes</a></li>'
+                                +'<li><form class="navbar-form navbar-left"><div class="form-group"><input type="text" class="form-control" placeholder="Search"></div></form></li>'
+                                +'<li><a ng-submit="logout()" href="#">Logout</a></li>'
+                            +'</ul>'
+                        +'</div>'
+                        +'</div>'
+                    +'</div>'  
+                +'</nav>'
+    }
+})
+.directive('usernav',function(){
+    return{
+        restrict:'E',
+        template:'<nav class="navbar navbar-inverse">'
+                    +'<div class="container">'
+                        +'<div class="container-fluid">'
+                            +'<div class="navbar-header">'
+                                +'<a class="navbar-brand" href="#/client">DexApp</a>'
+                            +'</div>'
+                        +'<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">'
+                            +'<ul class="nav navbar-nav navbar-right">'
+                                +'<li><a href="#/anime">Animes</a></li>'
+                                +'<li><form class="navbar-form navbar-left"><div class="form-group"><input type="text" class="form-control" placeholder="Search"></div></form></li>'
+                                +'<li><a ng-submit="logout()" href="#">Logout</a></li>'
+                            +'</ul>'
+                        +'</div>'
+                        +'</div>'
+                    +'</div>'  
+                +'</nav>'
+    }
 });

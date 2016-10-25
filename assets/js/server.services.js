@@ -1,6 +1,7 @@
 var base_url = window.location.protocol+'//'+window.location.host;
 console.log(base_url);
-angular.module('dexapp_server.services', []).factory('UsersList', function($location,$http,$httpParamSerializerJQLike,$rootScope) {
+angular.module('dexapp_server.services', [])
+.factory('UsersList', function($location,$http,$httpParamSerializerJQLike,$rootScope) {
     
     var img = [{ image: base_url+'/DexApp-Server/uploads/img/1-op.jpg',id:0,text:'One Piece'},
                 { image: base_url+'/DexApp-Server/uploads/img/2-nanatsu.jpg',id:1,text:'Nanatsu No Taizai'},
@@ -98,7 +99,7 @@ return {
                   console.log(resp.data.credentials);
                   $rootScope.Credentials = resp.data.credentials;
                    $location.path(resp.data.location);
-
+                  $rootScope.$broadcast();
                  // $rootScope.error_login = resp.data.err.error_login;
               },
               function(err){
@@ -309,4 +310,24 @@ return {
   return{
 
   }
+})
+.factory('AuthService',function($http,$httpParamSerializerJQLike,$rootScope){
+  $rootScope.Credentials = {};
+  $rootScope.LogOut = true;
+   $rootScope.$broadcast();
+  return{
+        isAuthenticated:function()
+        {
+            if(angular.equals($rootScope.Credentials, {}))
+            {
+              return false;
+            }else{
+              return true;
+            }
+          },
+        isLogout:function()
+        {
+          return $rootScope.LogOut;
+        }
+    }
 });

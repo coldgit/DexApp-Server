@@ -1,7 +1,9 @@
+<usernav></usernav>
 <div class="container" ng-controller="AnimeCtrl">
 	
+	<br>	<br>	<br>	<br>	
 	<div class="row" class="container" >
-  <div class="col-xs-6 col-md-3" ng-repeat="x in animes">
+  <div class="col-xs-4 col-md-4" ng-repeat="x in animes">
      <img class="thumbnail" width="384px" alt="{{x.ani_title}}" height="256px" src="{{x.img_src}}" ng-click="goTo(x.ani_url)">
   </div>
 </div>

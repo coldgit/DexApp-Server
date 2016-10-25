@@ -25,6 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</style>
 </head>
 <body ng-app="dexapp_server">
+		
 		<ui-view>
 		</ui-view>
 </body>

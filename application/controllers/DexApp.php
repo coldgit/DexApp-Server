@@ -8,7 +8,9 @@ class DexApp extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		echo header('asdasd');
+		// header('Location: '.base_url().'#/home');
+		// if(!isset(getallheaders()['Authorization']))
+		// echo $_SERVER['REQUEST_METHOD'];
 	}
 
 	public function index()
@@ -31,6 +33,7 @@ class DexApp extends MY_Controller
 	}
 
 	public function users($username = null){
+		
 		$data = array(
 					'key' => $_SERVER['REQUEST_METHOD'], 
 					'method' => (strtolower($_SERVER['REQUEST_METHOD']) == 'put')? 'get': strtolower($_SERVER['REQUEST_METHOD'])

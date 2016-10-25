@@ -108,7 +108,7 @@ angular.module('dexapp_server.controllers',[])
   {
     $scope.animeData.img_src = "uploads/"+$rootScope.image;
     Anime.new_anime($scope.animeData);  
-    $rootScope.image = "";
+    $rootScope.image = "img/empty.png";
     $scope.animeData = {};
     document.getElementById('f').value = "";
   }
@@ -169,4 +169,11 @@ angular.module('dexapp_server.controllers',[])
 })
 .controller('Episode_page',function($scope,$stateParams,Episode,$rootScope){
    Episode.get_episode($stateParams.url,$stateParams.id);
+})
+.controller('Auth',function($scope,$stateParams,AuthService,$rootScope){
+  $scope.logout = function(){
+        $rootScope.LogOut = false;
+        $rootScope.Credentials = {};
+        $rootScope.$broadcast();
+  }
 });
