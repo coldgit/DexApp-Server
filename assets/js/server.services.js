@@ -95,13 +95,14 @@ return {
               data:$httpParamSerializerJQLike(data),
             }).then(
               function(resp){
-                  console.log(resp.data);
-                  $location.path(resp.data.location);
+                  console.log(resp.data.credentials);
+                  $rootScope.Credentials = resp.data.credentials;
+                   $location.path(resp.data.location);
 
                  // $rootScope.error_login = resp.data.err.error_login;
               },
               function(err){
-                  console.log(err.data.err);
+                  console.log(err.data);
                   $rootScope.error_login = err.data.err.error_login;
               });
     },
@@ -129,7 +130,7 @@ return {
 } 
 
 })
-.factory('Anime',function($http,$httpParamSerializerJQLike,$rootScope){
+.factory('Anime',function($http,$httpParamSerializerJQLike,$rootScope,$location){
   return {
     uploadImg_anime:function(fd)
             {
@@ -196,10 +197,26 @@ return {
             function(err){
               console.log(err);
             });
+   },
+   get_anime:function(title)
+   {
+    $http({
+             method:'GET',
+             url: base_url+'/DexApp-Server/anime/'+title,
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+           }).then(
+             function(resp){
+                 console.log(resp.data[0]);
+                 $rootScope.anime = resp.data[0];
+                 $location.path('anime/'+$rootScope.anime.ani_url);
+             },
+             function(err){
+               console.log(err);
+             });
    }
   }
 })
-.factory('Episode',function($http,$httpParamSerializerJQLike,$rootScope){
+.factory('Episode',function($http,$httpParamSerializerJQLike,$rootScope,$location){
   return {
     uploadVideo_anime:function(fd)
             {
@@ -266,8 +283,26 @@ return {
             function(err){
               console.log(err);
             });
-    }
-   
+    },
+   get_episode:function(title,id)
+   {
+    console.log(title);
+    $http({
+             method:'GET',
+             url: base_url+'/DexApp-Server/anime/'+title+'/episode/'+id,
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+           }).then(
+             function(resp){
+                 console.log(resp.data[0]);
+                 $rootScope.episode = resp.data[0];
+                 $location.path('anime/'+$rootScope.episode.ani_url+"/episode/"+$rootScope.episode.episode);
+                
+             },
+             function(err){
+               console.log(err);
+             });
+
+   }
   }
 })
 .factory('Comment_',function($http,$httpParamSerializerJQLike,$rootScope){

@@ -94,8 +94,8 @@ angular.module('dexapp_server.controllers',[])
 			$scope.logData = {};
 		}
 })
-.controller('AnimeCtrl',function($scope,$http,$rootScope,Anime){
-  $rootScope.image = "img/logo.png";
+.controller('AnimeCtrl',function($scope,$http,$rootScope,Anime,$location){
+  $rootScope.image = "img/empty.png";
   $scope._img = function()
   {     
         var fd = new FormData();
@@ -116,6 +116,11 @@ angular.module('dexapp_server.controllers',[])
   $scope.delete_anime = function(ani_title)
   {
     Anime.delete_anime(ani_title);
+  }
+  $scope.goTo = function(ani_url)
+  {
+    console.log('/anime/'+ani_url);
+    Anime.get_anime(ani_url);
   }
 })
 .controller('EpisodeCtrl',function($scope,$http,Anime,$rootScope,Episode){
@@ -152,4 +157,16 @@ angular.module('dexapp_server.controllers',[])
 })
 .controller('CommentCtrl',function(){
 
+})
+.controller('Anime_page',function($scope,$stateParams,Anime,Episode){
+    Anime.get_anime($stateParams.url);
+    Episode.list_episodes($stateParams.url);
+    $scope.watch = function(id)
+    {
+     Episode.get_episode($stateParams.url,id);
+    }
+   
+})
+.controller('Episode_page',function($scope,$stateParams,Episode,$rootScope){
+   Episode.get_episode($stateParams.url,$stateParams.id);
 });

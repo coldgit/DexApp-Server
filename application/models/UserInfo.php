@@ -28,7 +28,7 @@ class UserInfo extends CI_Model {
 					{
 						if(isset($data['username']))
 						{
-							$query = $this->db->query("SELECT user_id,username,email,password,role FROM userinfo WHERE username = '{$data['username']}'  WHERE role != 'Admin' ");
+							$query = $this->db->query("SELECT user_id,username,email,password,role FROM userinfo WHERE username = '{$data['username']}'");
 							if($query->num_rows() === 1)
 							{
 								return array('status_code'=>'200','data' => $query->result_array());
@@ -56,5 +56,5 @@ class UserInfo extends CI_Model {
 			}
 
 	}
-	
+
 }

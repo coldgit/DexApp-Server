@@ -46,8 +46,8 @@ class Animes_epi_model extends CI_Model {
 		if($data['episode'] != null)
 		{	
 			$anime_id = $this->db->get_where('anime', array('ani_url' => $data['ani_title']));
-			$query = $this->db->query("SELECT episode_id,anime_id,epi_src,date_time,episode
-								FROM anime_video 
+			$query = $this->db->query("SELECT ani_url,episode_id,anime_id,epi_src,date_time,episode
+								FROM anime_episode
 								WHERE anime_id = '{$anime_id->result_array()[0]['anime_id']}'
 								AND episode = '{$data['episode']}' LIMIT 1");
 			if($query->num_rows() === 1)

@@ -1,0 +1,36 @@
+<div class="container" ng-controller="Anime_page">
+	
+	<br>
+	<br>
+	<div class="col-sm-6 col-md-4">
+	    <div class="thumbnail">
+	      <img src="{{anime.img_src}}" alt="{{anime.ani_title}}">
+	      <div class="caption">
+	        <h3>{{anime.ani_title}}</h3>
+	        <p>{{anime.summary}}</p>
+	        <p>{{anime.date_time}}</p>
+	      </div>
+	    </div>
+	  </div>
+	  <div class="col-md-7">
+	  <table class="table table-reponsive">
+                        <thead>
+                            <tr>
+                                <th>Episode</th>
+                                <th>Date Time</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in episodes.slice(((currentPage-1)*10), ((currentPage)*10))">
+                                <td>{{x.episode}}</td>
+                                <td>{{x.date_time}}</td>
+                                <td><button class="btn btn-default" ng-click="watch(x.episode)">Watch Now!</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>            
+                    <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" direction-links="true" num-pages="numPages"></ul>
+        			</div>
+        </div>
+</div>

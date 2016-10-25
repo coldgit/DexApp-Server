@@ -1,4 +1,5 @@
-angular.module('dexapp_server.directive',[]).directive('logform', function() {
+angular.module('dexapp_server.directive',[])
+.directive('logform', function() {
   return {
      restrict: 'E',
     template:

@@ -82,7 +82,7 @@ class DexApp extends MY_Controller
 						switch($info[ 0 ]['role'])
 						{
 							case 'Admin':
-								$data = array('status_code' => '200','data' => array('success' => 'TRUE','location' => 'admin'));
+								$data = array('status_code' => '200','data' => array('success' => 'TRUE','location' => 'admin','credentials' => $items));
 								$this->_resp($data);
 								//$this->session->set_userdata($items);
 							break;

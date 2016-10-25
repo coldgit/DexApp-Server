@@ -22,17 +22,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	.user-error{color:#f00;}
 	.d_success{color:green;}
 	@media screen and (min-width: 768px){.jumbotron { padding-top: 10px !important; padding-bottom: 10px  !important;}}
-	
 	</style>
 </head>
 <body ng-app="dexapp_server">
 		<ui-view>
 		</ui-view>
-		<!--	 
-		
-		<reglist></reglist>
-	</div> -->
-	<!--  -->
 </body>
 	<!--JavaScript-->
 	 <?php foreach ($scripts as $script):?>
