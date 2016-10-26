@@ -8,9 +8,7 @@ class DexApp extends MY_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		// header('Location: '.base_url().'#/home');
-		// if(!isset(getallheaders()['Authorization']))
-		// echo $_SERVER['REQUEST_METHOD'];
+		// print_r(getallheaders());
 	}
 
 	public function index()
@@ -80,12 +78,14 @@ class DexApp extends MY_Controller
 								'username' => $info[ 0 ]['username'],
 								'email' => $info[ 0 ]['email'],
 								'role' => $info[ 0 ]['role'],
-								 'logged_in' => TRUE
+								 'logged_in' => TRUE,
+								 'issuedAt'=>date(DATE_ISO8601, strtotime("now")),
+								 'ttl'=> ' 86400'
 						);
 						switch($info[ 0 ]['role'])
 						{
 							case 'Admin':
-								$data = array('status_code' => '200','data' => array('success' => 'TRUE','location' => 'admin','credentials' => $items));
+								$data = array('auth' => 'Bearer '.$this->jwt->encode($items,$this->skey).':'.base64_encode($this->skey),'status_code' => '200','data' => array('success' => 'TRUE','location' => 'admin','credentials' => $items));
 								$this->_resp($data);
 								//$this->session->set_userdata($items);
 							break;

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2016 at 02:07 AM
+-- Generation Time: Oct 26, 2016 at 04:20 AM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -34,6 +34,22 @@ CREATE TABLE `anime` (
   `date_time` text,
   `ani_url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `anime`
+--
+
+INSERT INTO `anime` (`anime_id`, `ani_title`, `img_src`, `summary`, `date_time`, `ani_url`) VALUES
+(2, 'One Punch Man', 'uploads/3-opm1.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:40:21', 'One-Punch-Man'),
+(3, 'One Piece', 'uploads/1-op.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:41:03', 'One-Piece'),
+(4, 'Nanatsu No Taizai', 'uploads/2-nanatsu.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:41:42', 'Nanatsu-No-Taizai'),
+(5, 'No Game No Life', 'uploads/4-ngnl.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:42:00', 'No-Game-No-Life'),
+(6, 'Shokugeki No Souma', 'uploads/5-shokugeki.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:42:28', 'Shokugeki-No-Souma'),
+(7, 'Haikyuu', 'uploads/6-haikyuu.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:42:45', 'Haikyuu'),
+(8, 'Blood Lad', 'uploads/7-bl.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:43:32', 'Blood-Lad'),
+(9, 'Code Geass', 'uploads/8-cg.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:43:49', 'Code-Geass'),
+(10, 'Death Note', 'uploads/9-dn.jpg', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:44:01', 'Death-Note'),
+(11, 'Jiu Jitsu Wa Watashi Wa', 'uploads/10-jitsu.png', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non\nproident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '2016-10-25 20:44:47', 'Jiu-Jitsu-Wa-Watashi-Wa');
 
 -- --------------------------------------------------------
 
@@ -113,6 +129,27 @@ CREATE TABLE `comment_per_episode` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gallery`
+--
+
+CREATE TABLE `gallery` (
+  `username` varchar(255) NOT NULL,
+  `gallery_id` int(11) NOT NULL,
+  `img_src` text NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `gallery`
+--
+
+INSERT INTO `gallery` (`username`, `gallery_id`, `img_src`, `status`) VALUES
+('dexter123123', 1, 'uploads/default.png', 1),
+('admin123', 2, 'uploads/default.png', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `userinfo`
 --
 
@@ -130,13 +167,8 @@ CREATE TABLE `userinfo` (
 --
 
 INSERT INTO `userinfo` (`user_id`, `username`, `password`, `email`, `role`, `acc_created`) VALUES
-(23, 'dasdasdasdasdasdasdasdas', '$2y$10$8.pbbJUHMdTKf4sE8M0Nc.hZIGlLNR0FgWho59DaBGJZZqD374UWq', 'dasdasdasdasdasdasdasdas@c.c', 'Client', '2016-09-13 17:31:21'),
-(24, 'dexter123', '$2y$10$QXC3xPlB7ONBcu85cM7.2eGukJn/tXs2oa8pyCWihWTrGvkSPwvKC', 'dexter123@c.c', 'Client', '2016-09-13 17:49:12'),
-(25, 'alvin123', '$2y$10$2EP8SL/akJq9t3KDUZKRQO6UV5Vjg6F6LTSfI91LCoLnWwHcl9t.a', 'alvin123@c.c', 'Client', '2016-09-13 17:57:08'),
-(27, 'qwertyui', '$2y$10$H1w6fViW0Q7leKH7F8DniOoCmviNnWWdMQETHqHPphIW5p3uZMrVa', 'qwertyui@c.c', 'Client', '2016-09-13 23:36:43'),
-(28, 'arthur123', '$2y$10$B6TWlBSDheegL5n7BGYiyes7lgeXaU6KX4ZQvg3Wzxve9GWQkRd1e', 'arthur123@c.c', 'Client', '2016-09-13 23:39:08'),
-(29, 'sadasdasd', '$2y$10$r58ESiTihHU8hiQrgrs3geOzTWPvgtFB2FMrNBO2BQvI01FrBdvy6', 'sadasdasd@c.c', 'Client', '2016-10-23 19:14:24'),
-(30, 'admin123', '$2y$10$GxSCUYR4u96TolLKHTz9peC8OzIdNdTxKfrY0kExYWbf9bNN5cmhi', 'admin123@c.c', 'Admin', '2016-10-24 22:26:18');
+(31, 'dexter123123', '$2y$10$InoL/W2xeK6aMKNi7cMPuOKj1rvjo.Hi/rC20/KgWplyohakt0uQC', 'dexter123123@c.c', 'Client', '2016-10-25 22:31:15'),
+(32, 'admin123', '$2y$10$fOuSgOUFuZm1BAF2.nESMenA3LYskfhyj8m2X20GT7VeWN/beDaIG', 'admin123@c.c', 'Admin', '2016-10-25 22:36:08');
 
 -- --------------------------------------------------------
 
@@ -225,6 +257,12 @@ ALTER TABLE `comment_per_episode`
   ADD KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `gallery`
+--
+ALTER TABLE `gallery`
+  ADD PRIMARY KEY (`gallery_id`);
+
+--
 -- Indexes for table `userinfo`
 --
 ALTER TABLE `userinfo`
@@ -238,12 +276,12 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `anime`
 --
 ALTER TABLE `anime`
-  MODIFY `anime_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `anime_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `anime_video`
 --
 ALTER TABLE `anime_video`
-  MODIFY `episode_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `episode_id` int(100) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `bookmarks`
 --
@@ -253,12 +291,17 @@ ALTER TABLE `bookmarks`
 -- AUTO_INCREMENT for table `comment_per_episode`
 --
 ALTER TABLE `comment_per_episode`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `gallery`
+--
+ALTER TABLE `gallery`
+  MODIFY `gallery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- Constraints for dumped tables
 --

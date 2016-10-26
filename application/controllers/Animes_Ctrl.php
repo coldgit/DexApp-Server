@@ -6,6 +6,8 @@ class Animes_Ctrl extends MY_Controller
 
 	public function __construct()
 	{
+		header('Access-Control-Allow-Origin: *');
+		header('Access-Control-Allow-Credentials: true');
 		parent::__construct();
 	}
 
