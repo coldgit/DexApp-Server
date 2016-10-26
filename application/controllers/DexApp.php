@@ -39,9 +39,6 @@ class DexApp extends MY_Controller
 				}
 				$this->_resp($data);
 			break;
-			case '405':
-				 $this->_resp(array('status_code' => 405,'data' => 'Method Not Allowed!'));
-			break ;
 			case '401':
 				 $this->_resp(array('status_code' => 401,'data' => 'Unauthorized!'));
 			break;
@@ -82,9 +79,6 @@ class DexApp extends MY_Controller
 
 				$this->_resp($this->UserInfo->users($data));
 			break;
-			case '405':
-				 $this->_resp(array('status_code' => 405,'data' => 'Method Not Allowed!'));
-			break ;
 			case '401':
 				 $this->_resp(array('status_code' => 401,'data' => 'Unauthorized!'));
 			break;
@@ -151,9 +145,6 @@ class DexApp extends MY_Controller
 						}
 				}
 			break;
-			case '405':
-				 $this->_resp(array('status_code' => 405,'data' => 'Method Not Allowed!'));
-			break ;
 			case '401':
 				 $this->_resp(array('status_code' => 401,'data' => 'Unauthorized!'));
 			break;

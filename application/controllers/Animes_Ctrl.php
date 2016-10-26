@@ -48,9 +48,6 @@ class Animes_Ctrl extends MY_Controller
 								break;
 						}
 			break;
-			case '405':
-				 $this->_resp(array('status_code' => 405,'data' => 'Method Not Allowed!'));
-			break ;
 			case '401':
 				 $this->_resp(array('status_code' => 401,'data' => 'Unauthorized!'));
 			break;

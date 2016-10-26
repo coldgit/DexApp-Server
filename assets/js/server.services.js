@@ -239,8 +239,7 @@ return {
           },
     new_episode:function(anime,data)
     {
-      console.log('add anime episode- '+$rootScope.Auth_key);
-      var url = base_url+'/DexApp-Server/anime/'+anime+'/episodes';
+     var url = base_url+'/DexApp-Server/anime/'+anime+'/episodes';
            $http({
             method:'POST',
             url:url,
@@ -256,8 +255,7 @@ return {
     },
     list_episodes:function(anime)
     {
-      console.log('list anime episode- '+$rootScope.Auth_key);
-      $http({
+     $http({
              method:'GET',
              url: base_url+'/DexApp-Server/anime/'+anime+'/episodes',
              headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':$rootScope.Auth_key},

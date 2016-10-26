@@ -31,7 +31,6 @@ class MY_Controller extends CI_Controller
 	public function restrict($restrict_user)
 	{
 		$headers = getallheaders();
-		
 		if(isset($headers['x-token']))
 		{
 		 	$credit = explode("@", $headers['x-token']);
@@ -45,9 +44,7 @@ class MY_Controller extends CI_Controller
 		 					if($restrict_user['method_use'] == $restrict_user['allowed_method'][$user["role"]]['method'][$method])
 		 					{
 		 						$data = 'true';
-		 					 }else{
-		 						$data = '405';
-		 					}
+		 					 }
 
 		 				}
 			 		
@@ -56,7 +53,6 @@ class MY_Controller extends CI_Controller
 				
 		 }else{
 		 	$data = '401';
-		 	// die();
 		 }
 		 return $data;
 	}
