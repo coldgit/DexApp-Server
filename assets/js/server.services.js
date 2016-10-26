@@ -1,5 +1,5 @@
 var base_url = window.location.protocol+'//'+window.location.host;
-console.log(base_url);
+var Guest_token = 'eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiR3Vlc3QiLCJpc3N1ZWRBdCI6IjIwMTYtMTAtMjZUMjM6Mzc6MjArMDIwMCIsInR0bCI6IiA4NjQwMCJ9.NkHSOMJ4946f5XMI-XQEqySqJooYHj9ZWHnL63EpCeo@R3Vlc3Q=';
 angular.module('dexapp_server.services', [])
 .factory('UsersList', function($location,$http,$httpParamSerializerJQLike,$rootScope) {
     
@@ -14,18 +14,16 @@ return {
     {
       return img;
     },
-    submit:function(data)
+    submit:function(data)//done token
     {
-       
-        var url = base_url+'/DexApp-Server/users';
+       var url = base_url+'/DexApp-Server/users';
         $http({
           method:'POST',
           url: url,
-          headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+          headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':Guest_token},
           data:$httpParamSerializerJQLike(data),
         }).then(
           function(resp){
-          console.log(resp.data);
           $rootScope.success = resp.data.success;
           $rootScope.reginfo = resp.data;
           $rootScope.regData = {};
@@ -33,6 +31,7 @@ return {
           function(err){
           console.log(err);
         });
+
     },
     getUsers:function()
     {
@@ -40,7 +39,7 @@ return {
          $http({
              method:'GET',
              url:url,
-             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' ,'x-token':$rootScope.Auth_key},
            }).then(
              function(resp){
                  console.log(resp.data.length);
@@ -49,17 +48,17 @@ return {
                  $rootScope.currentPage = 1;
                  $rootScope.maxSize = 5;
              },
-             function(err){
-               console.log(err);
+             function(resp){
+               console.log(resp);
              });
     },
     deleteUser:function(username)
     {
-        var url = base_url+'/DexApp-Server/users/';
+       var url = base_url+'/DexApp-Server/users/';
            $http({
             method:'DELETE',
             url:url+username,
-            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+            headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':$rootScope.Auth_key },
           }).then(
             function(resp){
                 console.log(resp.data.length);
@@ -75,7 +74,7 @@ return {
            $http({
             method:'GET',
             url:url,
-            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+            headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':$rootScope.Auth_key },
           }).then(
             function(resp){
                 console.log(resp.data[0]);
@@ -87,16 +86,17 @@ return {
     },
     login:function(data)
     { 
-      console.log(data);
       var url = base_url+'/DexApp-Server/auth';
            $http({
               method:'POST',
               url:url,
-              headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+              headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':Guest_token },
               data:$httpParamSerializerJQLike(data),
             }).then(
               function(resp){
-                  console.log(resp.data.credentials);
+                console.log(resp.headers()['x-token']);
+                $rootScope.Auth_key = resp.headers()['x-token'];
+                  // console.log(resp.data.credentials);
                   $rootScope.Credentials = resp.data.credentials;
                    $location.path(resp.data.location);
                   $rootScope.$broadcast();
@@ -107,11 +107,12 @@ return {
                   $rootScope.error_login = err.data.err.error_login;
               });
     },
-    check:function(username){
+    check:function(username)//done token
+    {
        $http({
              method:'GET',
              url:base_url+'/DexApp-Server/dexapp/Checker?username='+username,
-            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+            headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':Guest_token },
             params:{username:username},
            }).then(
              function(resp){
@@ -155,7 +156,7 @@ return {
            $http({
             method:'POST',
             url:url,
-            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' ,'x-token':$rootScope.Auth_key},
             data:$httpParamSerializerJQLike(data),
           }).then(
             function(resp){
@@ -171,7 +172,7 @@ return {
       $http({
              method:'GET',
              url: base_url+'/DexApp-Server/anime',
-             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':$rootScope.Auth_key },
            }).then(
              function(resp){
                  console.log(resp.data);
@@ -181,15 +182,15 @@ return {
                  $rootScope.maxSize = 5;
              },
              function(err){
-               console.log(err);
+               console.log(err.status);
              });
    },
    delete_anime:function(ani_title)
    {
-         $http({
+     $http({
             method:'DELETE',
             url:base_url+'/DexApp-Server/anime/'+ani_title,
-            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' ,'x-token':$rootScope.Auth_key},
           }).then(
             function(resp){
                 console.log(resp.data.length);
@@ -204,7 +205,7 @@ return {
     $http({
              method:'GET',
              url: base_url+'/DexApp-Server/anime/'+title,
-             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':$rootScope.Auth_key },
            }).then(
              function(resp){
                  console.log(resp.data[0]);
@@ -238,11 +239,12 @@ return {
           },
     new_episode:function(anime,data)
     {
+      console.log('add anime episode- '+$rootScope.Auth_key);
       var url = base_url+'/DexApp-Server/anime/'+anime+'/episodes';
            $http({
             method:'POST',
             url:url,
-            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+            headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':$rootScope.Auth_key},
             data:$httpParamSerializerJQLike(data),
           }).then(
             function(resp){
@@ -254,10 +256,11 @@ return {
     },
     list_episodes:function(anime)
     {
+      console.log('list anime episode- '+$rootScope.Auth_key);
       $http({
              method:'GET',
              url: base_url+'/DexApp-Server/anime/'+anime+'/episodes',
-             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':$rootScope.Auth_key},
            }).then(
              function(resp){
                  console.log(resp.data);
@@ -275,7 +278,7 @@ return {
       $http({
             method:'DELETE',
             url:base_url+'/DexApp-Server/anime/'+title+'/episode/'+id,
-            headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+            headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':$rootScope.Auth_key},
           }).then(
             function(resp){
                 console.log(resp.data);
@@ -287,11 +290,10 @@ return {
     },
    get_episode:function(title,id)
    {
-    console.log(title);
-    $http({
+   $http({
              method:'GET',
              url: base_url+'/DexApp-Server/anime/'+title+'/episode/'+id,
-             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' ,'x-token':$rootScope.Auth_key},
            }).then(
              function(resp){
                  console.log(resp.data[0]);

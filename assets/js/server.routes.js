@@ -2,7 +2,8 @@ var base_url = window.location.protocol+'//'+window.location.host;
 
 angular.module('dexapp_server.routes',[])
 .run(function($rootScope, $state, AuthService){
-  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+ $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+   
     if (toState.authenticate && !AuthService.isAuthenticated() && AuthService.isLogout()){
       // User isn’t authenticated
       $state.transitionTo("home");

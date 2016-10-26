@@ -5,7 +5,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class MY_Controller extends CI_Controller
 {
 
-	protected $skey = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
 	public $resources = [
 	 					'css' => array('assets/bower_components/bootstrap/dist/css/bootstrap.css',
 										'assets/bower_components/angular-bootstrap/ui-bootstrap-csp.css',
@@ -28,32 +27,63 @@ class MY_Controller extends CI_Controller
 											'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 										)
 						];
+
+	public function restrict($restrict_user)
+	{
+		$headers = getallheaders();
+		
+		if(isset($headers['x-token']))
+		{
+		 	$credit = explode("@", $headers['x-token']);
+		 	$user = (Array)$this->jwt->decode($credit[0],base64_decode($credit[1]));
+		 		for($user_type = 0 ; $user_type < COUNT($restrict_user['list_users']) ; $user_type++ )
+		 		{	
+		 			if($user["role"] === $restrict_user['list_users'][$user_type])
+		 			{
+		 				for($method = 0; $method < COUNT($restrict_user['allowed_method'][$user["role"]]['method']) ; $method++ )
+		 				{
+		 					if($restrict_user['method_use'] == $restrict_user['allowed_method'][$user["role"]]['method'][$method])
+		 					{
+		 						$data = 'true';
+		 					 }else{
+		 						$data = '405';
+		 					}
+
+		 				}
+			 		
+			 		}
+		 		}
+				
+		 }else{
+		 	$data = '401';
+		 	// die();
+		 }
+		 return $data;
+	}
+
+
 	public function __construct()
 	{
-// 		header("Access-Control-Allow-Origin: *");
-// 		header("Access-Control-Allow-Headers: Authorization, Origin, X-Requested-With, Content-Type,Accept");
-// 		header("Content-Type: application/json");
-// 		$headers = getallheaders();
-// echo $headers['Authorization'];
 		parent::__construct();
-
-// 		$headers = apache_request_headers() ;
-// //  print_r($headers);
-// 		if(isset($headers['Authorization'])){
-// 		        //$credentials = base64_decode($headers);
-// 		        print_r(apache_request_headers());
-// 		}
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Headers: x-token, Origin, X-Requested-With, Content-Type,Accept");
+		header('Access-Control-Request-Method: POST, GET, PUT, DELETE');
+		
 	}
 
 	public function _resp($data)
 	{
-		// $this->output->set_header('Authorization:'.$data['auth']);
-		$this->output
-			->set_status_header($data['status_code'])
-			->set_header('Content-type:application/json')
-			->set_header('Access-Control-Allow-Origin: *')
-			->set_output(json_encode($data['data']),
+		$this->output->set_status_header($data['status_code']);
+		$this->output->set_header('Content-type:application/json');
+		if(isset($data['xtoken']))
+		{
+			$this->output->set_header('x-token: '.$data['xtoken']);
+		}
+		if(isset($data['data']))
+		{
+			$this->output->set_output(json_encode($data['data']),
 			JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+		}
 	}
 	
 }
