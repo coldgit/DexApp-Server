@@ -27,12 +27,14 @@ class MY_Controller extends CI_Controller
 											'assets/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js'
 										)
 						];
+	protected $restrict = '';
 
 	public function restrict($restrict_user)
 	{
 		$headers = getallheaders();
 		if(isset($headers['x-token']))
 		{
+			 // echo $headers['x-token'];
 		 	$credit = explode("@", $headers['x-token']);
 		 	$user = (Array)$this->jwt->decode($credit[0],base64_decode($credit[1]));
 		 		for($user_type = 0 ; $user_type < COUNT($restrict_user['list_users']) ; $user_type++ )
@@ -43,7 +45,7 @@ class MY_Controller extends CI_Controller
 		 				{
 		 					if($restrict_user['method_use'] == $restrict_user['allowed_method'][$user["role"]]['method'][$method])
 		 					{
-		 						$data = 'true';
+		 						$this->restrict = 'true';
 		 					 }
 
 		 				}
@@ -52,9 +54,9 @@ class MY_Controller extends CI_Controller
 		 		}
 				
 		 }else{
-		 	$data = '401';
+		 	$this->restrict = '401';
 		 }
-		 return $data;
+	return $this->restrict;
 	}
 
 
