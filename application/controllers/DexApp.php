@@ -139,12 +139,12 @@ class DexApp extends MY_Controller
 								switch($info[ 0 ]['role'])
 								{
 									case 'Admin':
-										$data = array('xtoken' => $this->jwt->encode($items,$items['username']).'@'.base64_encode($items['username']),'status_code' => '200','data' => array('success' => 'TRUE','location' => 'admin','credentials' => $items));
+										$data = array('xtoken' => $this->jwt->encode($items,'Admin').'@'.base64_encode('Admin'),'status_code' => '200','data' => array('success' => 'TRUE','location' => 'admin','credentials' => $items));
 										$this->_resp($data);
 									break;
 									
 									case 'Client':
-										$data = array('xtoken' => $this->jwt->encode($items,$items['username']).'@'.base64_encode($items['username']),'status_code' => '200','data' => array('success' => 'TRUE','location' => 'client','credentials' => $items));
+										$data = array('xtoken' => $this->jwt->encode($items,'Client').'@'.base64_encode('Client'),'status_code' => '200','data' => array('success' => 'TRUE','location' => 'client','credentials' => $items));
 										$this->_resp($data);
 										break;		
 								}
