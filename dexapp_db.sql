@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2016 at 04:20 AM
+-- Generation Time: Oct 27, 2016 at 11:14 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 5.6.24
 
@@ -112,6 +112,19 @@ CREATE TABLE `bookmarks` (
   `user_id` int(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `bookmarks`
+--
+
+INSERT INTO `bookmarks` (`bookmark_id`, `anime_id`, `user_id`) VALUES
+(6, 2, 31),
+(7, 3, 31),
+(8, 4, 31),
+(9, 5, 31),
+(10, 5, 33),
+(11, 6, 33),
+(12, 8, 33);
+
 -- --------------------------------------------------------
 
 --
@@ -145,7 +158,21 @@ CREATE TABLE `gallery` (
 
 INSERT INTO `gallery` (`username`, `gallery_id`, `img_src`, `status`) VALUES
 ('dexter123123', 1, 'uploads/default.png', 1),
-('admin123', 2, 'uploads/default.png', 1);
+('admin123', 2, 'uploads/default.png', 1),
+('dexter123123123', 3, 'uploads/default.png', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `gallery_user`
+--
+CREATE TABLE `gallery_user` (
+`user_id` int(100)
+,`username` text
+,`gallery_id` int(11)
+,`img_src` text
+,`status` int(11)
+);
 
 -- --------------------------------------------------------
 
@@ -168,7 +195,8 @@ CREATE TABLE `userinfo` (
 
 INSERT INTO `userinfo` (`user_id`, `username`, `password`, `email`, `role`, `acc_created`) VALUES
 (31, 'dexter123123', '$2y$10$InoL/W2xeK6aMKNi7cMPuOKj1rvjo.Hi/rC20/KgWplyohakt0uQC', 'dexter123123@c.c', 'Client', '2016-10-25 22:31:15'),
-(32, 'admin123', '$2y$10$fOuSgOUFuZm1BAF2.nESMenA3LYskfhyj8m2X20GT7VeWN/beDaIG', 'admin123@c.c', 'Admin', '2016-10-25 22:36:08');
+(32, 'admin123', '$2y$10$fOuSgOUFuZm1BAF2.nESMenA3LYskfhyj8m2X20GT7VeWN/beDaIG', 'admin123@c.c', 'Admin', '2016-10-25 22:36:08'),
+(33, 'dexter123123123', '$2y$10$7FAyDpa6pafFJyQUYMHwfe7b5Sh3UW4QBTS2du4el542VmXLoNDUu', 'dexter123123123@c.c', 'Client', '2016-10-26 19:27:00');
 
 -- --------------------------------------------------------
 
@@ -194,6 +222,7 @@ CREATE TABLE `users_anime_episode_and_comments` (
 ,`email` text
 ,`role` text
 ,`acc_created` datetime
+,`profpic` text
 );
 
 -- --------------------------------------------------------
@@ -217,11 +246,20 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `gallery_user`
+--
+DROP TABLE IF EXISTS `gallery_user`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gallery_user`  AS  select `userinfo`.`user_id` AS `user_id`,`userinfo`.`username` AS `username`,`gallery`.`gallery_id` AS `gallery_id`,`gallery`.`img_src` AS `img_src`,`gallery`.`status` AS `status` from (`gallery` join `userinfo`) where (`gallery`.`username` = `userinfo`.`username`) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `users_anime_episode_and_comments`
 --
 DROP TABLE IF EXISTS `users_anime_episode_and_comments`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `users_anime_episode_and_comments`  AS  select `anime`.`anime_id` AS `anime_id`,`anime`.`ani_title` AS `ani_title`,`anime`.`img_src` AS `img_src`,`anime`.`summary` AS `summary`,`anime`.`date_time` AS `anime_release`,`anime`.`ani_url` AS `ani_url`,`anime_video`.`episode_id` AS `episode_id`,`anime_video`.`epi_src` AS `epi_src`,`anime_video`.`date_time` AS `episode_release`,`anime_video`.`episode` AS `episode`,`comment_per_episode`.`comment_id` AS `comment_id`,`comment_per_episode`.`comment` AS `comment`,`comment_per_episode`.`user_id` AS `user_id`,`comment_per_episode`.`date_time` AS `date_time_commented`,`userinfo`.`username` AS `username`,`userinfo`.`email` AS `email`,`userinfo`.`role` AS `role`,`userinfo`.`acc_created` AS `acc_created` from (((`anime` join `anime_video`) join `comment_per_episode`) join `userinfo`) where ((`anime`.`anime_id` = `anime_video`.`anime_id`) and (`anime_video`.`episode_id` = `comment_per_episode`.`epi_id`) and (`comment_per_episode`.`user_id` = `userinfo`.`user_id`) and (`userinfo`.`role` = 'Client')) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `users_anime_episode_and_comments`  AS  select `anime`.`anime_id` AS `anime_id`,`anime`.`ani_title` AS `ani_title`,`anime`.`img_src` AS `img_src`,`anime`.`summary` AS `summary`,`anime`.`date_time` AS `anime_release`,`anime`.`ani_url` AS `ani_url`,`anime_video`.`episode_id` AS `episode_id`,`anime_video`.`epi_src` AS `epi_src`,`anime_video`.`date_time` AS `episode_release`,`anime_video`.`episode` AS `episode`,`comment_per_episode`.`comment_id` AS `comment_id`,`comment_per_episode`.`comment` AS `comment`,`comment_per_episode`.`user_id` AS `user_id`,`comment_per_episode`.`date_time` AS `date_time_commented`,`userinfo`.`username` AS `username`,`userinfo`.`email` AS `email`,`userinfo`.`role` AS `role`,`userinfo`.`acc_created` AS `acc_created`,`gallery`.`img_src` AS `profpic` from ((((`anime` join `anime_video`) join `comment_per_episode`) join `userinfo`) join `gallery`) where ((`anime`.`anime_id` = `anime_video`.`anime_id`) and (`anime_video`.`episode_id` = `comment_per_episode`.`epi_id`) and (`comment_per_episode`.`user_id` = `userinfo`.`user_id`) and (`gallery`.`username` = `userinfo`.`username`) and (`gallery`.`status` = '1') and (`userinfo`.`role` = 'Client')) ;
 
 --
 -- Indexes for dumped tables
@@ -276,32 +314,32 @@ ALTER TABLE `userinfo`
 -- AUTO_INCREMENT for table `anime`
 --
 ALTER TABLE `anime`
-  MODIFY `anime_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `anime_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `anime_video`
 --
 ALTER TABLE `anime_video`
-  MODIFY `episode_id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `episode_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `bookmarks`
 --
 ALTER TABLE `bookmarks`
-  MODIFY `bookmark_id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `bookmark_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `comment_per_episode`
 --
 ALTER TABLE `comment_per_episode`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `gallery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `gallery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `user_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- Constraints for dumped tables
 --
