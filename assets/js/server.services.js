@@ -1,5 +1,4 @@
 var base_url = window.location.protocol+'//'+window.location.host;
-var Guest_token = 'eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiR3Vlc3QiLCJpc3N1ZWRBdCI6IjIwMTYtMTAtMjZUMjM6Mzc6MjArMDIwMCIsInR0bCI6IiA4NjQwMCJ9.NkHSOMJ4946f5XMI-XQEqySqJooYHj9ZWHnL63EpCeo@R3Vlc3Q=';
 angular.module('dexapp_server.services', [])
 .factory('UsersList', function($location,$http,$httpParamSerializerJQLike,$rootScope) {
     
@@ -90,13 +89,14 @@ return {
            $http({
               method:'POST',
               url:url,
-              headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':Guest_token },
+              headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
               data:$httpParamSerializerJQLike(data),
             }).then(
               function(resp){
                 console.log(resp.headers()['x-token']);
-                $rootScope.Auth_key = resp.headers()['x-token'];
+                // $rootScope.Auth_key = resp.headers()['x-token'];
                   // console.log(resp.data.credentials);
+                  console.log(resp.data);
                   $rootScope.Credentials = resp.data.credentials;
                    $location.path(resp.data.location);
                   $rootScope.$broadcast();
@@ -161,7 +161,11 @@ return {
           }).then(
             function(resp){
                 console.log(resp);
-                $rootScope.animes = resp.data
+                $rootScope.animes = resp.data;
+                $rootScope.totalItems = resp.data.length;
+                 $rootScope.currentPage = 1;
+                 $rootScope.maxSize = 5;
+                $rootScope.$broadcast();
             },
             function(err){
               console.log(err);
@@ -180,6 +184,7 @@ return {
                  $rootScope.totalItems = resp.data.length;
                  $rootScope.currentPage = 1;
                  $rootScope.maxSize = 5;
+                 $rootScope.$broadcast();
              },
              function(err){
                console.log(err.status);
@@ -195,6 +200,7 @@ return {
             function(resp){
                 console.log(resp.data.length);
                 $rootScope.animes = resp.data;
+                $rootScope.$broadcast();
             },
             function(err){
               console.log(err);
@@ -205,13 +211,27 @@ return {
     $http({
              method:'GET',
              url: base_url+'/DexApp-Server/anime/'+title,
-             headers: { 'Content-Type' : 'application/x-www-form-urlencoded','x-token':$rootScope.Auth_key },
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
            }).then(
              function(resp){
                  console.log(resp.data[0]);
                  $rootScope.anime = resp.data[0];
                  $location.path('anime/'+$rootScope.anime.ani_url);
              },
+             function(err){
+               console.log(err);
+             });
+   },
+   select_anime:function(title)
+   {
+      $http({
+             method:'GET',
+             url: base_url+'/DexApp-Server/anime/'+title,
+             headers: { 'Content-Type' : 'application/x-www-form-urlencoded'},
+           }).then(
+             function(resp){
+                 console.log(resp.data[0]);
+              },
              function(err){
                console.log(err);
              });
@@ -288,6 +308,8 @@ return {
     },
    get_episode:function(title,id)
    {
+$rootScope.b_url = base_url+'DexApp-Server/';
+  
    $http({
              method:'GET',
              url: base_url+'/DexApp-Server/anime/'+title+'/episode/'+id,
@@ -331,3 +353,11 @@ return {
         }
     }
 });
+
+
+// var values = {name: 'misko', gender: 'male'};
+// var log = [];
+// angular.forEach(values, function(value, key) {
+//   this.push(key + ': ' + value);
+// }, log);
+// expect(log).toEqual(['name: misko', 'gender: male']);

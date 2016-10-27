@@ -71,6 +71,12 @@ $route['anime/(:any)/episode/(:any)'] = 'Animes_epi_Ctrl/animes_epi_/$1/$2';
 $route['episode/(:any)/comments']	= 'Animes_comment_Ctrl/animes_comment/$1';
 $route['episode/(:any)/comment/(:any)'] = 'Animes_comment_Ctrl/animes_comment/$1/$2';
 
+$route['bookmark/(:any)']		= 'Bookmarks_Ctrl/bookmarked/$1';
+$route['bookmark/(:any)/anime/(:any)'] = 'Bookmarks_Ctrl/bookmarked/$1/$2';
+
+$route['gallery/(:any)']	= 'Gallery_Ctrl/gallery/$1';
+$route['gallery/(:any)/image/(:any)'] = 'Gallery_Ctrl/gallery/$1/$2';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 

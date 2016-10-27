@@ -22,6 +22,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	.user-error{color:#f00;}
 	.d_success{color:green;}
 	@media screen and (min-width: 768px){.jumbotron { padding-top: 10px !important; padding-bottom: 10px  !important;}}
+	.img:hover{opacity:0.8;}
+	
 	</style>
 </head>
 <body ng-app="dexapp_server">

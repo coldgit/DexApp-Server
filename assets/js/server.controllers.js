@@ -1,6 +1,7 @@
 angular.module('dexapp_server.controllers',[])
 .controller('DexApp_ctrl', function($scope,$rootScope,UsersList)
 	{
+    
 		$rootScope.regData = {};
 		$scope.change = function(){
 
@@ -122,6 +123,10 @@ angular.module('dexapp_server.controllers',[])
     console.log('/anime/'+ani_url);
     Anime.get_anime(ani_url);
   }
+  $scope.select_anime =function(title)
+  {
+    Anime.select_anime(title);
+  }
 })
 .controller('EpisodeCtrl',function($scope,$http,Anime,$rootScope,Episode){
   Anime.list_anime();
@@ -164,6 +169,10 @@ angular.module('dexapp_server.controllers',[])
     $scope.watch = function(id)
     {
      Episode.get_episode($stateParams.url,id);
+    }
+    $scope.addBook = function(id)
+    {
+      console.log(id);
     }
    
 })

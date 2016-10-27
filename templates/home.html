@@ -22,5 +22,18 @@
 
 						</div>
 					</div>	
-						
-		</div>
+			<div class="container" ng-controller="AnimeCtrl">
+			<br>	<br>	<br>	<br>	
+				<div class="row" class="container" >
+				  <div class="col-xs-4 col-md-4" ng-repeat="x in animes">
+					  <img class="thumbnail img"
+				     	  width="384px" 
+				     	  alt="{{x.ani_title}}" 
+				     	  height="256px" 
+				     	  src="{{x.img_src}}" 
+				     	  ng-click="goTo(x.ani_url)">
+				     	  <div class="caption"><h3>{{x.ani_title}}</h3></div>
+				  </div>
+				</div>
+			</div>	
+</div>

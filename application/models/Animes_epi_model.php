@@ -32,7 +32,6 @@ class Animes_epi_model extends CI_Model {
 
 	public function _new_epi($data)
 	{
-		//
 		$anime_id = $this->db->get_where('anime', array('ani_url' => $data['ani_title']));
 		$data['data']+=array('anime_id' => $anime_id->result_array()[0]['anime_id']);
 		$this->db->insert('anime_video',$data['data']);

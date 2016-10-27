@@ -29,35 +29,35 @@ class MY_Controller extends CI_Controller
 						];
 	protected $restrict = '';
 
-	public function restrict($restrict_user)
-	{
-		$headers = getallheaders();
-		if(isset($headers['x-token']))
-		{
-			 // echo $headers['x-token'];
-		 	$credit = explode("@", $headers['x-token']);
-		 	$user = (Array)$this->jwt->decode($credit[0],base64_decode($credit[1]));
-		 		for($user_type = 0 ; $user_type < COUNT($restrict_user['list_users']) ; $user_type++ )
-		 		{	
-		 			if($user["role"] === $restrict_user['list_users'][$user_type])
-		 			{
-		 				for($method = 0; $method < COUNT($restrict_user['allowed_method'][$user["role"]]['method']) ; $method++ )
-		 				{
-		 					if($restrict_user['method_use'] == $restrict_user['allowed_method'][$user["role"]]['method'][$method])
-		 					{
-		 						$this->restrict = 'true';
-		 					 }
+	// public function restrict($restrict_user)
+	// {
+	// 	$headers = getallheaders();
+	// 	if(isset($headers['x-token']))
+	// 	{
+	// 		 // echo $headers['x-token'];
+	// 	 	$credit = explode("@", $headers['x-token']);
+	// 	 	$user = (Array)$this->jwt->decode($credit[0],base64_decode($credit[1]));
+	// 	 		for($user_type = 0 ; $user_type < COUNT($restrict_user['list_users']) ; $user_type++ )
+	// 	 		{	
+	// 	 			if($user["role"] === $restrict_user['list_users'][$user_type])
+	// 	 			{
+	// 	 				for($method = 0; $method < COUNT($restrict_user['allowed_method'][$user["role"]]['method']) ; $method++ )
+	// 	 				{
+	// 	 					if($restrict_user['method_use'] == $restrict_user['allowed_method'][$user["role"]]['method'][$method])
+	// 	 					{
+	// 	 						$this->restrict = 'true';
+	// 	 					 }
 
-		 				}
+	// 	 				}
 			 		
-			 		}
-		 		}
+	// 		 		}
+	// 	 		}
 				
-		 }else{
-		 	$this->restrict = '401';
-		 }
-	return $this->restrict;
-	}
+	// 	 }else{
+	// 	 	$this->restrict = '401';
+	// 	 }
+	// return $this->restrict;
+	// }
 
 
 	public function __construct()

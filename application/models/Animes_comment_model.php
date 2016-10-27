@@ -10,44 +10,39 @@ class Animes_comment_model extends CI_Model {
 	
 	public function comment_($data)
 	{
-		switch ($data['key']) {
+		switch ($data['key']) 
+		{
 			case 'POST':
-				return $this->_new_comment($data);
+				$this->db->insert('comment_per_episode', $data['data']);
+				$out = $this->comment_(array('key'=>'GET','epi' => $data['epi']));
 				break;
 			case 'GET':
-				return $this->_retrieve_comment($data);
+				if(isset($data['com_id']))
+				{
+					$query = $this->db->query("SELECT comment_id,comment 
+											   FROM users_anime_episode_and_comments
+											   WHERE episode_id = '{$data['epi']}' 
+											   AND comment_id = '{$data['com_id']}'");
+				}else{
+					$query = $this->db->query("SELECT comment_id,comment,username,profpic,date_time_commented
+											   FROM users_anime_episode_and_comments
+											   WHERE episode_id = '{$data['epi']}' ORDER BY comment_id ASC");
+				}
+				$out = $query->result_array();
 				break;
 			case 'PUT':
-				return $this->_update_comment($data);
+				$this->db->update('comment_per_episode', $data['data'], array('comment_id' => $data['com_id']));
+				$out = $this->comment_(array('key'=>'GET','epi' => $data['epi']));
 				break;
 			case 'DELETE':
-				return $this->_remove_comment($data);
-				break;
+				$this->db->delete('comment_per_episode', array('comment_id' => $data['com_id']));
+				$out = $this->comment_(array('key'=>'GET','epi' => $data['epi']));
+			break;
 			
 			default:
 				# code...
 				break;
 		}
-	}
-
-	public function _new_comment($data)
-	{
-		$data['data']+=array();
-		var_dump($data);
-	}
-	
-	public function _retrieve_comment($data)
-	{
-		var_dump($data);
-	}
-	
-	public function _update_comment($data)
-	{
-		var_dump($data);
-	}
-	
-	public function _remove_comment($data)
-	{
-		var_dump($data);
+		return array('status_code' => '200','data' => $out);
 	}
 }

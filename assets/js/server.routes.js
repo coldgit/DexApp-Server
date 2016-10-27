@@ -2,6 +2,8 @@ var base_url = window.location.protocol+'//'+window.location.host;
 
 angular.module('dexapp_server.routes',[])
 .run(function($rootScope, $state, AuthService){
+  $rootScope.admin = false;
+  $rootScope.client = false;
  $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
    
     if (toState.authenticate && !AuthService.isAuthenticated() && AuthService.isLogout()){
@@ -25,23 +27,20 @@ angular.module('dexapp_server.routes',[])
     .state('admin', {
       url: '/admin',
       templateUrl: 'templates/admin.html',
-      authenticate:true
+      // authenticate:true
     })
 
     .state('all',{
       url:'/anime',
       templateUrl: 'templates/animes.html',
-      authenticate:true
     })
     .state('anime',{
       url:'/anime/:url',
       templateUrl: 'templates/anime.html',
-      authenticate:true
     })
     .state('episode',{
       url:'/anime/:url/episode/:id',
       templateUrl: 'templates/episode.html',
-      authenticate:true
     })
 
 
