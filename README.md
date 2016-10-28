@@ -50,3 +50,7 @@ function cors() {
 
     echo "You have CORS!";
 }
+
+
+
+grant all privileges on mydb.* to myuser@localhost identified by 'mypasswd';
